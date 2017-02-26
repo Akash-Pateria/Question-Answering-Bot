@@ -1,0 +1,500 @@
+O O O O O S-LOC O S-LOC O 
+O O O B-LOC E-LOC O O 
+O O S-PER O 
+O O O O O 
+O O S-LOC O O O O 
+O O O O B-ORG E-ORG O 
+B-PER E-PER O O O O O O O O O 
+O O S-LOC O O O O 
+O O O O O O O 
+O O O O 
+O O O O O O O O O 
+O O O O O O O O O 
+O O O O O O O B-LOC E-LOC O 
+O O O O O O O O O B-LOC E-LOC O 
+O O S-ORG O O O O 
+O O O O O O O O 
+O O O O O O O O 
+O O O O O O O 
+O O O O 
+O O O O S-MISC O O 
+O O O O S-MISC O O O O O 
+O O O O O 
+O O O O S-LOC O O O O B-LOC E-LOC O 
+O O O O O 
+O O O O 
+O O O S-ORG O O 
+O O O O 
+O O O O O O O S-LOC O B-LOC E-LOC O 
+O O B-PER E-PER O O 
+O O O O S-LOC O O 
+O O O O O O O O O O B-LOC E-LOC O 
+O O O B-LOC E-LOC O 
+O O O O 
+O O O O O O O O O O O 
+O O B-PER I-PER E-PER O O O O O 
+O O O B-PER E-PER O O O O 
+O O O B-LOC E-LOC O 
+O O O O O O O O O O O O 
+O O O O O O O O O 
+O O B-LOC E-LOC O O O 
+O O O O O O O O O 
+O O O O 
+O O O O 
+O O O O O 
+O O O O O O O O O O 
+O O O O O O O O 
+O O O B-PER I-PER E-PER O O 
+O O O O 
+O O O O O O O 
+O O O O O O O O O B-LOC E-LOC O 
+O O O O 
+O O O O 
+O O O O O O O O O O 
+O O O O 
+O O O O O O O O O 
+O O O O O O O 
+O O B-PER E-PER O O 
+O O O O O S-LOC O 
+O O S-ORG O 
+O O O O O O O 
+O O O O O O O B-LOC E-LOC O 
+O O B-ORG E-ORG O O O 
+O O O O B-LOC I-LOC E-LOC O B-LOC E-LOC O 
+O O O O O 
+O O O O B-MISC I-MISC E-MISC O O O O 
+O O B-PER E-PER O 
+O O O O O O O O 
+O O O O O 
+O O O O O B-PER E-PER O O 
+O O O B-LOC E-LOC O S-LOC O 
+O O O O O S-LOC O 
+O O O O O O O S-MISC O 
+O O O O O O O O O 
+O S-MISC O O O O O B-MISC I-MISC E-MISC O 
+O O O B-ORG I-ORG I-ORG E-ORG O 
+O O O O O O 
+O O O O O O O S-LOC O 
+O O O O B-ORG E-ORG O B-LOC I-LOC E-LOC O 
+O O O O O O O O O O 
+O O O O O O S-LOC O 
+O O O O O 
+O O O O O O O 
+O O O O O B-LOC E-LOC O O O 
+O O O O O S-LOC O 
+O O B-PER E-PER O O 
+O O O O O O 
+O O O O 
+O O O O O B-LOC E-LOC O O 
+O O O O 
+O O O B-ORG I-ORG E-ORG O O O 
+O B-ORG I-ORG I-ORG E-ORG O O O O O O S-LOC O O O O 
+O O O O O 
+O O O O O O O O O O 
+O O O S-LOC O O B-ORG E-ORG O 
+O O O O O O O S-LOC O 
+O O O B-LOC E-LOC O 
+O O O O O O O 
+O O O O 
+O O O O O 
+O O O O O O O O O O O 
+O O O O 
+O O O O O 
+O O O O O O 
+O O B-PER E-PER O 
+O O O B-LOC E-LOC O O 
+O O O O O 
+O O O O O O O O O 
+O O O S-LOC O O O 
+O O B-PER E-PER O O O O 
+O O O O O O O S-LOC O 
+O O O O O O O O 
+O O O O 
+O O O O O O O O O O O S-LOC O 
+O O O O O B-PER E-PER O O O 
+O O S-LOC O O O O 
+O O B-MISC E-MISC O O O 
+O O O S-MISC O O 
+O O O O O O 
+O O O O O O O B-ORG E-ORG O O B-MISC E-MISC O 
+O O S-LOC O 
+O O O S-MISC O O 
+O O O O O O O O O 
+O O O O O 
+O O S-LOC O 
+O O O O O O O 
+O O O O O 
+O O O O O O O O 
+O O O O O O O O 
+O O S-MISC O 
+O O O O O O O O O 
+O O O O O O O 
+O O O O O O O O O B-LOC I-LOC E-LOC O O O 
+O O O O O O O 
+O O O O O O O O O O 
+O O O O 
+O O O O O O O S-LOC O 
+O O O B-LOC E-LOC O 
+O O O O O S-PER O 
+O O O B-PER E-PER O O O O 
+O O O O 
+O O O O O 
+O O O O O B-PER E-PER O O O 
+O O O B-ORG E-ORG O 
+O O O O O O O 
+O O O O 
+O O O O O O O O O O 
+O O O S-MISC O O 
+O O B-PER E-PER O O O 
+O O B-ORG I-ORG E-ORG O O 
+O O O O 
+O O O O O O O O 
+O O O O 
+O O O O 
+O O S-LOC O O 
+O O O O O O O O O O O O O O 
+O O O S-LOC O O 
+O O O O O S-LOC O 
+O O O O 
+O O O O O S-MISC O O O O O O O O 
+O O O O O O O O O O O O 
+O O O O O O 
+O O O O 
+O O O O O O S-LOC O 
+O O O O B-LOC E-LOC O 
+O O O O O O O B-LOC E-LOC O 
+O O O S-LOC O O O 
+O O S-PER O S-PER O O 
+O O O O 
+O O O O O O O O O O O 
+O O B-ORG I-ORG E-ORG O 
+O O O O B-ORG E-ORG O O B-ORG E-ORG O 
+O O O O O O 
+O O O O O O 
+O O O O 
+O O O B-LOC I-LOC E-LOC O 
+O S-LOC O O O O O O O O O 
+O O O S-LOC O 
+O O O O O O O 
+O O O O O O O O O O 
+O O O S-LOC O O O O 
+O O O O O O B-LOC E-LOC O O 
+O O O O 
+O O O B-LOC E-LOC O 
+O O O O 
+O O O O O O O 
+O O O O O O S-LOC O 
+O S-MISC O O O O O O O S-LOC O 
+O O O O 
+O O B-PER E-PER O O 
+O O O O O O O 
+O O O O O O S-LOC O 
+O O O O O O O O O O O O O 
+O O O O O O O O O O 
+O O O O S-ORG O O O 
+O O O O O 
+O O O O O O O O O 
+O O O O O S-LOC O 
+O O O O O O 
+O O O O O O O O O 
+O O O O O O 
+O O O O O O O O O B-ORG E-ORG O O O O O O 
+O O O O O O B-ORG E-ORG O 
+O O O O O 
+O O O O O O O O O O O 
+O O O O O O O O 
+O O O O B-LOC E-LOC O O 
+O O O O O O O B-LOC E-LOC O 
+O O O O O O O 
+O O O O O O 
+O O O O O O O O 
+O O O O B-LOC E-LOC O O O O 
+O O O O O O O O 
+O O O S-LOC O O 
+O B-LOC I-LOC E-LOC O O O O O O B-LOC E-LOC O 
+O O O O 
+O O O O O O O O O S-LOC O 
+O O O O O 
+O O O O O O O O 
+O O O O O O O 
+O O O O 
+O O O O O 
+O O O O B-PER E-PER O O 
+O O O S-LOC O O 
+O O O O O O B-LOC E-LOC O 
+O O O O B-LOC E-LOC O O S-LOC O S-LOC O 
+O O O O O O 
+O O O O O S-LOC O 
+O O O O O O 
+O O O B-LOC E-LOC O 
+O O O O O 
+O O O O S-LOC O S-LOC O 
+O O O O O O O O S-LOC O 
+O O O O 
+O O O O O O O O O O O O 
+O O O O O O O S-MISC O O 
+O O O O 
+O S-LOC O O O O O O 
+O O O O 
+O O O O O O B-LOC I-LOC E-LOC O 
+O O O O O 
+O S-MISC O O O O O O 
+O O B-MISC I-MISC E-MISC O 
+O O O O O 
+O O O O 
+O O O O 
+O O O O O O O O S-LOC O 
+O O O O O 
+O O O O O 
+O O O O O 
+O O O O O O O O O 
+O O O O O O O O O 
+O O O O O O 
+O O B-PER E-PER O B-PER E-PER O O O O 
+O O O O O O O O O 
+O O O O 
+O O O O O O O O O 
+O O O O O O B-LOC E-LOC O 
+O O O O S-MISC O O O O 
+O O B-MISC E-MISC O 
+S-MISC O O O O O S-LOC O O 
+O O O O B-MISC E-MISC O O O O B-LOC E-LOC O 
+O O O O O O O S-LOC O 
+O O S-ORG O O O O B-MISC E-MISC O 
+O O O B-PER E-PER O O 
+O O O S-PER O S-LOC O O O O 
+O O O O O O O 
+O O O O 
+O O O O O S-LOC O 
+O O O O O O O O 
+O O B-PER E-PER O O 
+O O O O O O S-LOC O 
+O O O O O O O O O S-ORG O O O 
+O O O O 
+O O O O O O O O S-LOC O 
+O O O O 
+O O O O O O O 
+O O O O 
+O O O S-LOC O O O O 
+O O O O O S-LOC O 
+O O O O O O O O 
+O O O O O O O O O 
+O O S-ORG O O O O O 
+O O S-PER O O O 
+O O O O O 
+O O S-PER O O 
+O O O O 
+O O O O O 
+O O S-LOC O 
+O O O O 
+O O O O O 
+O O O O O O O S-LOC O 
+O O O O O O O 
+O O O O O O O O O O 
+O O O O O O O O O 
+O O S-MISC O 
+O O O O 
+O O O O O 
+O O O O O O O O O O O O O O S-LOC O 
+O O O O O O 
+O O O O O O O O 
+O O S-ORG O O O 
+O O O O S-ORG O O O O 
+O O O O O 
+O O O B-PER E-PER O O O O O 
+O O S-LOC O O 
+O O O B-LOC E-LOC O 
+O O O O O O O O B-LOC E-LOC O 
+O O O O O O O O O O O O 
+O O O O O S-LOC O 
+O O O S-PER O O O S-LOC O 
+O O O O O S-LOC O 
+O O O B-ORG E-ORG O 
+O O O O O O O O 
+O O O O 
+O O O O O O O S-LOC O 
+O O O O O O 
+O O O O S-MISC O O O O O O 
+O O O B-MISC I-MISC E-MISC O 
+O O O O O O O O 
+O O O O O O 
+O O O O 
+O O O S-PER O O 
+O O S-ORG O 
+O O O O O O 
+O O O S-PER O S-PER O O 
+O O O O O O O O 
+O O O O O O 
+O O O O O O O O O O 
+O O B-PER E-PER O O 
+O O O B-LOC E-LOC O 
+O O O O 
+O O O S-PER O O 
+O O O O O O O O 
+O O O O O B-PER E-PER O O O 
+O O O O O O O O 
+O O O O O O O B-LOC E-LOC O 
+O O O O 
+O O O S-PER O O O O 
+O O B-LOC E-LOC O 
+O O O O O O O O O O O O 
+O O O O O O 
+O O O B-PER E-PER O O O O O 
+O O O O O O B-LOC E-LOC O 
+O O O O O O O O O O O O 
+O O O O O S-LOC O 
+O O O O O O B-LOC E-LOC O 
+O O O 
+O O O O O O O O O O 
+O O O O B-PER E-PER O O O 
+O O O O O 
+O O O O O S-LOC O O O 
+O O O O O B-LOC E-LOC O 
+O O O S-LOC O O O 
+O O S-LOC O O O O 
+O O O O 
+O O B-MISC I-MISC E-MISC O 
+O O O O O O O 
+O O O O O O O O O 
+O O O O O O O O O 
+O O O O O S-PER O O B-MISC I-MISC E-MISC O 
+O O O O O 
+O O O O O 
+O O O O O O O O O O O O O O O O 
+O O O B-MISC E-MISC O O B-LOC I-LOC E-LOC O 
+O O O O O 
+O O O O O B-LOC I-LOC E-LOC O 
+O O O O O O O O O O O O O O O O 
+O O O O O O S-MISC O O 
+O O O B-LOC E-LOC O 
+O O O O O O B-LOC E-LOC O 
+O O O O O O O O 
+O O O O O O S-LOC O 
+O O O O 
+O O O O O O 
+O O O O O O 
+O O B-LOC E-LOC O O O O 
+O O O O O O 
+O O O O 
+O O S-ORG O O O 
+O O O O O 
+O O B-PER I-PER E-PER O 
+O O O O O O O O S-LOC O 
+O O O O O 
+O O O O S-MISC O O O O O O O O O O 
+O O O O O O O O B-LOC E-LOC O 
+O O B-PER I-PER E-PER O O 
+O O B-PER E-PER O 
+O O O O B-LOC E-LOC O 
+O O O O O 
+O O O O O O 
+O O O O O O O 
+O O O O O 
+O O O O O O O 
+O O O O O O O 
+O O O O 
+O O O O O O 
+O O O O 
+O O O O O O O B-LOC E-LOC O 
+O O O O O O O O O O O 
+O O O O O O O O O O 
+O O S-PER O O O 
+O O O O O O O O 
+O O O O O O 
+O O O O S-ORG O O O 
+O O O O B-LOC E-LOC O O O 
+O O O O O O B-LOC E-LOC O 
+O O O O O 
+O O O B-ORG I-ORG E-ORG O O 
+O O O S-LOC O O O 
+O O O O 
+O S-LOC O O O O O O O 
+O O O O O O 
+O O O O O S-LOC O 
+O O S-ORG O O O 
+O O O O O O S-LOC O 
+O O O O 
+O O O O O 
+O O O O O 
+O O O O O O O S-LOC O O O O O O 
+O O O O O O 
+O O O O O O O 
+O O S-LOC O O O O 
+O O O O O O O S-PER O O O O S-LOC O 
+O O O O 
+O O O S-LOC O O 
+O O O O O S-ORG O O O O O O 
+O O O O O 
+O O O O O O O O 
+O O O O 
+O O O O 
+O O O O O O 
+O O O O O O O S-ORG O B-LOC I-LOC E-LOC O 
+O O O S-MISC O O O O 
+O O O O O O O O B-LOC E-LOC O 
+O O O O O 
+O O O O 
+O O O O O O 
+O O O O O O O O O 
+O O O O O O O 
+O O O O O O S-LOC O 
+O O O O O 
+O O O O O O O 
+O O O O O O O O 
+O O O O O O O O 
+O O O O O O O O O O O S-MISC O 
+O O O O O O O B-MISC E-MISC O O 
+O O O O O O S-LOC O 
+O O O O B-MISC E-MISC O O O B-MISC E-MISC O O O 
+O O B-MISC I-MISC I-MISC E-MISC O 
+O O S-ORG O O O O O 
+O O O O O O O O O O O O 
+O O O O O O O S-LOC O 
+O O O O O O O O O 
+O O B-PER E-PER O O 
+O O O O O O O 
+O O O O O O 
+O O O O O O O O 
+O O O O O O O O B-LOC E-LOC O 
+O O O O 
+O O O O 
+O O B-PER E-PER O O 
+O O B-LOC E-LOC O O O O 
+O O O B-LOC E-LOC O S-LOC O 
+O O S-PER O S-PER O O O 
+O O O O O O O B-LOC E-LOC O 
+O O O O O O O O O O O O O O O 
+O O O O 
+O O O O O O B-LOC E-LOC O 
+O O O O O 
+O O O O O 
+O O O O 
+O O O O O 
+O O O S-LOC O O 
+O O O O O S-LOC O 
+O O O O O O O O O O 
+O O O S-LOC O O 
+O O O O O 
+O S-MISC O O O O O O 
+O O O O O 
+O O O B-LOC E-LOC O B-LOC I-LOC E-LOC O 
+O O O O O O O S-LOC O O O O O 
+O O O O O O O O O O 
+O O O O O O O O O O 
+O O O O O 
+O O O O B-LOC E-LOC O 
+O O O O O 
+O O O O O O O O O O S-LOC O 
+O O O O O O O 
+O O O O O O O O 
+O O O O S-ORG O B-PER E-PER O O O O O O 
+O O O O 
+O O O O O O 
+O O O O O O O O O 
+O O O O S-MISC O O O O O 
+O O O O O O O O 
+O O O O O O O S-LOC O 
+O O O O O O O S-LOC O 
+O O O O O O O 
+O O O O O O O 
+O O O O 
