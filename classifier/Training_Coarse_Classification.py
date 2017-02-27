@@ -60,25 +60,25 @@ for line in lines:
 
 print ("Training")
 
-vectorizer_words= CountVectorizer(min_df=1)
+vectorizer_words= CountVectorizer(min_df=1,ngram_range=(1, 2))
 X_words = vectorizer_words.fit_transform(append('word_features_train_coarse_path'))
 f.close()
 print ("word feature extraction done")
 
 
-vectorizer_POS= CountVectorizer(min_df=1)
+vectorizer_POS= CountVectorizer(min_df=1,ngram_range=(1, 2))
 X_POS = vectorizer_POS.fit_transform((append('POS_features_train_coarse_path')))
 f.close()
 print ("POS feature extraction done")
 
 
-vectorizer_Chunk= CountVectorizer(min_df=1)
+vectorizer_Chunk= CountVectorizer(min_df=1,ngram_range=(1, 2))
 X_Chunk = vectorizer_Chunk.fit_transform((append('Chunk_features_train_path')))
 f.close()
 print ("Chunk feature extraction done")
 
 
-vectorizer_NER= CountVectorizer(stop_words=None,min_df=1)
+vectorizer_NER= CountVectorizer(min_df=1,ngram_range=(1, 2))
 X_NER = vectorizer_NER.fit_transform(append('NER_features_train_coarse_path'))
 f.close()
 print ("Vectorize")
