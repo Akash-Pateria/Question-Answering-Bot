@@ -5,6 +5,7 @@ from scipy.sparse import hstack
 from sklearn.svm import LinearSVC
 from practnlptools.tools import Annotator
 from readproperties import read_property
+import cPickle
 
 ##removing special characters from sentence##
 def preprocess(raw_sentence):
@@ -127,15 +128,23 @@ X_test=hstack((X_test,X_Chunk))
 ###################Applying the LinearSVC Classifier#########################
 
 print ("Applying SVC")
-self = LinearSVC(loss='squared_hinge', dual=False, tol=1e-3)
-self = LinearSVC.fit(self, X_train, train_class)
-test_class = LinearSVC.predict(self, X_test)
+coarse_model = LinearSVC(loss='squared_hinge', dual=False, tol=1e-3)
+coarse_model = LinearSVC.fit(coarse_model, X_train, train_class)
+test_class = LinearSVC.predict(coarse_model, X_test)
+
+'''
+Saving the model in secondory memory for future references
+'''
+pickle_out = open("TrainedModels/coarse_model.pickle","wb")
+cPickle.dump(coarse_model, pickle_out, protocol=cPickle.HIGHEST_PROTOCOL)
+
+''' storing to secondory memory done '''
+
 
 #####Calculating success rate#####
 hits=0.00
 fi=open(read_property('coarse_classification_path'),"w")
 for i in range(0,len(test_class)):
-    print (test_class[i]," : ",corpus_test[i],"\n")
     str_l=test_class[i]," : ",corpus_test[i],"\n"
     fi.write(test_class[i]+" : ")
     fi.write(corpus_test[i]+"\n")

@@ -9,7 +9,7 @@ DESC : What is Australia s national flower ?
 DESC : Why does the moon turn orange ? 
 DESC : What is autism ? 
 LOC : What city had a world fair in 1900 ? 
-DESC : What person s head is on a dime ? 
+ENTY : What person s head is on a dime ? 
 NUM : What is the average weight of a Yellow Labrador ? 
 HUM : Who was the first man to fly across the Pacific Ocean ? 
 NUM : When did Idaho become a state ? 
@@ -25,9 +25,9 @@ DESC : What is bipolar disorder ?
 DESC : What is cholesterol ? 
 HUM : Who developed the Macintosh computer ? 
 DESC : What is caffeine ? 
-LOC : What imaginary line is halfway between the North and South Poles ? 
+ENTY : What imaginary line is halfway between the North and South Poles ? 
 LOC : Where is John Wayne airport ? 
-DESC : What hemisphere is the Philippines in ? 
+ENTY : What hemisphere is the Philippines in ? 
 NUM : What is the average speed of the horses at the Kentucky Derby ? 
 LOC : Where are the Rocky Mountains ? 
 DESC : What are invertebrates ? 
@@ -42,7 +42,7 @@ ENTY : Material called linen is made from what plant ?
 DESC : What is Teflon ? 
 DESC : What is amitriptyline ? 
 DESC : What is a shaman ? 
-DESC : What is the proper name for a female walrus ? 
+ENTY : What is the proper name for a female walrus ? 
 ENTY : What is a group of turkeys called ? 
 NUM : How long did Rip Van Winkle sleep ? 
 DESC : What are triglycerides ? 
@@ -88,11 +88,11 @@ DESC : What is amoxicillin ?
 HUM : Who was the first female United States Representative ? 
 DESC : What are xerophytes ? 
 LOC : What country did Ponce de Leon come from ? 
-HUM : The US Department of Treasury first issued paper currency for the US during which war ? 
+ENTY : The US Department of Treasury first issued paper currency for the US during which war ? 
 DESC : What is desktop publishing ? 
 NUM : What is the temperature of the sun s surface ? 
 NUM : What year did Canada join the United Nations ? 
-HUM : What is the oldest university in the US ? 
+LOC : What is the oldest university in the US ? 
 LOC : Where is Prince Edward Island ? 
 NUM : Mercury what year was it discovered ? 
 DESC : What is cryogenics ? 
@@ -110,19 +110,19 @@ NUM : When were William Shakespeare s twins born ?
 LOC : What is the highest dam in the US ? 
 ENTY : What color is a poison arrow frog ? 
 DESC : What is acupuncture ? 
-NUM : What is the length of the coastline of the state of Alaska ? 
+LOC : What is the length of the coastline of the state of Alaska ? 
 ENTY : What is the name of Neil Armstrong s wife ? 
 LOC : What is Hawaii s state flower ? 
 HUM : Who won Ms American in 1989 ? 
 NUM : When did the Hindenberg crash ? 
-DESC : What mineral helps prevent osteoporosis ? 
+ENTY : What mineral helps prevent osteoporosis ? 
 NUM : What was the last year that the Chicago Cubs won the World Series ? 
 LOC : Where is Perth ? 
 NUM : What year did WWII begin ? 
-ENTY : What is the diameter of a golf ball ? 
+DESC : What is the diameter of a golf ball ? 
 DESC : What is an eclipse ? 
 HUM : Who discovered America ? 
-ENTY : What is the earth s diameter ? 
+DESC : What is the earth s diameter ? 
 HUM : Which president was unmarried ? 
 NUM : How wide is the Milky Way galaxy ? 
 ENTY : During which season do most thunderstorms occur ? 
@@ -130,10 +130,10 @@ DESC : What is Wimbledon ?
 NUM : What is the gestation period for a cat ? 
 NUM : How far is a nautical mile ? 
 HUM : Who was the abolitionist who led the raid on Harper s Ferry in 1859 ? 
-NUM : What does target heart rate mean ? 
+DESC : What does target heart rate mean ? 
 ENTY : What was the first satellite to go into space ? 
 DESC : What is foreclosure ? 
-LOC : What is the major fault line near Kentucky ? 
+DESC : What is the major fault line near Kentucky ? 
 LOC : Where is the Holland Tunnel ? 
 HUM : Who wrote the hymn Amazing Grace ? 
 HUM : What position did Willie Davis play in baseball ? 
@@ -145,7 +145,7 @@ ENTY : What is a baby turkey called ?
 DESC : What is poliomyelitis ? 
 ENTY : What is the longest bone in the human body ? 
 HUM : Who is a German philosopher ? 
-DESC : What were Christopher Columbus three ships ? 
+ENTY : What were Christopher Columbus three ships ? 
 DESC : What does Phi Beta Kappa mean ? 
 DESC : What is nicotine ? 
 ENTY : What is another name for vitamin B1 ? 
@@ -163,10 +163,10 @@ DESC : What are polymers ?
 NUM : When is hurricane season in the Caribbean ? 
 LOC : Where is the volcano Mauna Loa ? 
 ENTY : What is another astronomic term for the Northern Lights ? 
-HUM : What peninsula is Spain part of ? 
+ENTY : What peninsula is Spain part of ? 
 NUM : When was Lyndon B Johnson born ? 
 DESC : What is acetaminophen ? 
-NUM : What state has the least amount of rain per year ? 
+LOC : What state has the least amount of rain per year ? 
 HUM : Who founded American Red Cross ? 
 NUM : What year did the Milwaukee Braves become the Atlanta Braves ? 
 NUM : How fast is alcohol absorbed ? 
@@ -184,12 +184,12 @@ LOC : Where is the Euphrates River ?
 DESC : What is cryptography ? 
 DESC : What is natural gas composed of ? 
 HUM : Who is the Prime Minister of Canada ? 
-ENTY : What French ruler was defeated at the battle of Waterloo ? 
+HUM : What French ruler was defeated at the battle of Waterloo ? 
 DESC : What is leukemia ? 
 LOC : Where did Howard Hughes die ? 
 DESC : What is the birthstone for June ? 
 DESC : What is the sales tax in Minnesota ? 
-LOC : What is the distance in miles from the earth to the sun ? 
+NUM : What is the distance in miles from the earth to the sun ? 
 NUM : What is the average life span for a chicken ? 
 NUM : When was the first Wal-Mart store opened ? 
 DESC : What is relative humidity ? 
@@ -199,18 +199,18 @@ HUM : Who invented the hula hoop ?
 ENTY : What was the most popular toy in 1957 ? 
 ENTY : What is pastrami made of ? 
 ENTY : What is the name of the satellite that the Soviet Union sent into space in 1957 ? 
-ENTY : What city s newspaper is called The Enquirer ? 
+LOC : What city s newspaper is called The Enquirer ? 
 HUM : Who invented the slinky ? 
 ENTY : What are the animals that don t have backbones called ? 
 DESC : What is the melting point of copper ? 
 LOC : Where is the volcano Olympus Mons located ? 
 HUM : Who was the 23rd president of the United States ? 
 NUM : What is the average body temperature ? 
-DESC : What does a defibrillator do ? 
+ENTY : What does a defibrillator do ? 
 DESC : What is the effect of acid rain ? 
 NUM : What year did the United States abolish the draft ? 
 NUM : How fast is the speed of light ? 
-DESC : What province is Montreal in ? 
+LOC : What province is Montreal in ? 
 LOC : What New York City structure is also known as the Twin Towers ? 
 DESC : What is fungus ? 
 ENTY : What is the most frequently spoken language in the Netherlands ? 
@@ -225,7 +225,7 @@ DESC : What is the electrical output in Madrid Spain ?
 LOC : Which mountain range in North America stretches from Maine to Georgia ? 
 ENTY : What is plastic made of ? 
 NUM : What is the population of Nigeria ? 
-DESC : What does your spleen do ? 
+ENTY : What does your spleen do ? 
 LOC : Where is the Grand Canyon ? 
 HUM : Who invented the telephone ? 
 NUM : What year did the US buy Alaska ? 
@@ -253,11 +253,11 @@ DESC : What are the twin cities ?
 ENTY : What did Edward Binney and Howard Smith invent in 1903 ? 
 ENTY : What is the statue of liberty made of ? 
 DESC : What is pilates ? 
-DESC : What planet is known as the red planet ? 
+LOC : What planet is known as the red planet ? 
 LOC : What is the depth of the Nile river ? 
 ENTY : What is the colorful Korean traditional dress called ? 
 DESC : What is Mardi Gras ? 
-LOC : Mexican pesos are worth what in US dollars ? 
+HUM : Mexican pesos are worth what in US dollars ? 
 HUM : Who was the first African American to play for the Brooklyn Dodgers ? 
 HUM : Who was the first Prime Minister of Canada ? 
 NUM : How many Admirals are there in the US Navy ? 
@@ -289,13 +289,13 @@ DESC : What are Quaaludes ?
 DESC : What is naproxen ? 
 DESC : What is strep throat ? 
 LOC : What is the largest city in the US ? 
-ENTY : What is foot and mouth disease ? 
+DESC : What is foot and mouth disease ? 
 NUM : What is the life expectancy of a dollar bill ? 
 ENTY : What do you call a professional map drawer ? 
 DESC : What are Aborigines ? 
 DESC : What is hybridization ? 
 ENTY : What color is indigo ? 
-DESC : How old do you have to be in order to rent a car in Italy ? 
+NUM : How old do you have to be in order to rent a car in Italy ? 
 ENTY : What does a barometer measure ? 
 ENTY : What color is a giraffe s tongue ? 
 ABBR : What does USPS stand for ? 
@@ -320,7 +320,7 @@ ENTY : What are the two types of twins ?
 LOC : What is the brightest star ? 
 DESC : What is diabetes ? 
 NUM : When was President Kennedy shot ? 
-DESC : What is TMJ ? 
+ABBR : What is TMJ ? 
 ENTY : What color is yak milk ? 
 NUM : What date was Dwight D Eisenhower born ? 
 DESC : What does the technical term ISDN mean ? 
@@ -344,7 +344,7 @@ NUM : What is the murder rate in Windsor Ontario ?
 HUM : Who is the only president to serve 2 non-consecutive terms ? 
 NUM : What is the population of Australia ? 
 HUM : Who painted the ceiling of the Sistine Chapel ? 
-HUM : Name a stimulant 
+ENTY : Name a stimulant 
 DESC : What is the effect of volcanoes on the climate ? 
 NUM : What year did the Andy Griffith show begin ? 
 DESC : What is acid rain ? 
@@ -356,11 +356,11 @@ DESC : What is quicksilver ?
 HUM : Who wrote The Divine Comedy ? 
 NUM : What is the speed of light ? 
 DESC : What is the width of a football field ? 
-DESC : Why in tennis are zero points called love ? 
+ENTY : Why in tennis are zero points called love ? 
 ENTY : What kind of dog was Toto in the Wizard of Oz ? 
 DESC : What is a thyroid ? 
 DESC : What does ciao mean ? 
-HUM : What is the only artery that carries blue blood from the heart to the lungs ? 
+DESC : What is the only artery that carries blue blood from the heart to the lungs ? 
 NUM : How often does Old Faithful erupt at Yellowstone National Park ? 
 DESC : What is acetic acid ? 
 DESC : What is the elevation of St Louis MO ? 
@@ -380,7 +380,7 @@ ABBR : What does CPR stand for ?
 DESC : What is an annuity ? 
 HUM : Who killed John F Kennedy ? 
 HUM : Who was the first vice president of the US ? 
-DESC : What birthstone is turquoise ? 
+ENTY : What birthstone is turquoise ? 
 HUM : Who was the first US President to ride in an automobile to his inauguration ? 
 NUM : How old was the youngest president of the United States ? 
 NUM : When was Ulysses S Grant born ? 
@@ -395,10 +395,10 @@ NUM : What is the world s population ?
 DESC : What is nepotism ? 
 DESC : What is die-casting ? 
 DESC : What is myopia ? 
-DESC : What is the sales tax rate in New York ? 
+NUM : What is the sales tax rate in New York ? 
 NUM : Developing nations comprise what percentage of the world s population ? 
 LOC : What is the fourth highest mountain in the world ? 
-HUM : What is Shakespeare s nickname ? 
+DESC : What is Shakespeare s nickname ? 
 ENTY : What is the heaviest naturally occurring element ? 
 NUM : When is Father s Day ? 
 ABBR : What does the acronym NASA stand for ? 
@@ -412,7 +412,7 @@ HUM : Which USA president appeared on Laugh-In ?
 ENTY : What are cigarettes made of ? 
 LOC : What is the capital of Zimbabwe ? 
 ABBR : What does NASA stand for ? 
-LOC : What is the state flower of Michigan ? 
+DESC : What is the state flower of Michigan ? 
 DESC : What are semiconductors ? 
 DESC : What is nuclear power ? 
 DESC : What is a tsunami ? 
@@ -429,7 +429,7 @@ LOC : Where is the tallest roller coaster located ?
 DESC : What are enzymes ? 
 HUM : Who discovered oxygen ? 
 DESC : What is bangers and mash ? 
-LOC : What is the name given to the Tiger at Louisiana State University ? 
+ENTY : What is the name given to the Tiger at Louisiana State University ? 
 LOC : Where are the British crown jewels kept ? 
 HUM : Who was the first person to reach the North Pole ? 
 DESC : What is an ulcer ? 
@@ -439,9 +439,9 @@ NUM : When is the official first day of summer ?
 ABBR : What does the abbreviation SOS mean ? 
 ENTY : What is the smallest bird in Britain ? 
 HUM : Who invented Trivial Pursuit ? 
-DESC : What gasses are in the troposphere ? 
+ENTY : What gasses are in the troposphere ? 
 LOC : Which country has the most water pollution ? 
-HUM : What is the scientific name for elephant ? 
+ENTY : What is the scientific name for elephant ? 
 HUM : Who is the actress known for her role in the movie Gypsy ? 
 ENTY : What breed of hunting dog did the Beverly Hillbillies own ? 
 DESC : What is the rainiest place on Earth ? 
@@ -450,9 +450,9 @@ NUM : When is St Patrick s Day ?
 ENTY : What was FDR s dog s name ? 
 ENTY : What colors need to be mixed to get the color pink ? 
 ENTY : What is the most popular sport in Japan ? 
-ENTY : What is the active ingredient in baking soda ? 
+DESC : What is the active ingredient in baking soda ? 
 NUM : When was Thomas Jefferson born ? 
-DESC : How cold should a refrigerator be ? 
+NUM : How cold should a refrigerator be ? 
 NUM : When was the telephone invented ? 
 ENTY : What is the most common eye color ? 
 LOC : Where was the first golf course in the United States ? 
@@ -460,8 +460,8 @@ DESC : What is schizophrenia ?
 DESC : What is angiotensin ? 
 ENTY : What did Jesse Jackson organize ? 
 ENTY : What is New York s state bird ? 
-LOC : What is the National Park in Utah ? 
-NUM : What is Susan B Anthony s birthday ? 
+DESC : What is the National Park in Utah ? 
+DESC : What is Susan B Anthony s birthday ? 
 LOC : In which state would you find the Catskill Mountains ? 
 ENTY : What do you call a word that is spelled the same backwards and forwards ? 
 DESC : What are pediatricians ? 
@@ -494,7 +494,7 @@ ENTY : What s the easiest way to remove wallpaper ?
 NUM : What year did the Titanic start on its journey ? 
 NUM : How much of an apple is water ? 
 HUM : Who was the 22nd President of the US ? 
-ENTY : What is the money they use in Zambia ? 
+DESC : What is the money they use in Zambia ? 
 NUM : How many feet in a mile ? 
 DESC : What is the birthstone of October ? 
 DESC : What is e-coli ? 

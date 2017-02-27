@@ -5,6 +5,7 @@ from scipy.sparse import hstack
 from sklearn.svm import LinearSVC
 from practnlptools.tools import Annotator
 from readproperties import read_property
+import cPickle
 
 
 annotator=Annotator()
@@ -136,6 +137,31 @@ ENTY_model=fine_train_label('ENTY')
 HUM_model=fine_train_label('HUM')
 DESC_model=fine_train_label('DESC')
 ABBR_model=fine_train_label('ABBR')
+
+'''
+Saving all the models to secondory memory
+'''
+pickle_out = open("TrainedModels/NUM_model.pickle","wb")
+cPickle.dump(NUM_model, pickle_out, protocol=cPickle.HIGHEST_PROTOCOL)
+
+pickle_out = open("TrainedModels/LOC_model.pickle","wb")
+cPickle.dump(LOC_model, pickle_out, protocol=cPickle.HIGHEST_PROTOCOL)
+
+pickle_out = open("TrainedModels/ENTY_model.pickle","wb")
+cPickle.dump(ENTY_model, pickle_out, protocol=cPickle.HIGHEST_PROTOCOL)
+
+pickle_out = open("TrainedModels/HUM_model.pickle","wb")
+cPickle.dump(HUM_model, pickle_out, protocol=cPickle.HIGHEST_PROTOCOL)
+
+pickle_out = open("TrainedModels/DESC_model.pickle","wb")
+cPickle.dump(DESC_model, pickle_out, protocol=cPickle.HIGHEST_PROTOCOL)
+
+pickle_out = open("TrainedModels/ABBR_model.pickle","wb")
+cPickle.dump(ABBR_model, pickle_out, protocol=cPickle.HIGHEST_PROTOCOL)
+
+''' storing to secondory memory done '''
+
+
 
 
 coarse_class = get_coarse_output_class()
