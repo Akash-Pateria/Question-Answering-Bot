@@ -6,7 +6,25 @@ from sklearn.svm import LinearSVC
 from practnlptools.tools import Annotator
 from readproperties import read_property
 
+
+annotator=Annotator()
+
+def preprocess(raw_sentence):
+    sentence= re.sub(r'[$|.|!|"|(|)|,|;|`|\']',r'',raw_sentence)
+    return sentence
+
 def append(filename):
+	f=open(read_property(filename),"r")
+	corpus=[]
+	for lines in f:
+		l=lines.split()
+		words=""
+		for w in l:
+			words=words+w+" "
+		corpus.append(words)
+	return corpus
+
+def append_noread(filename):
 	f=open(filename,"r")
 	corpus=[]
 	for lines in f:
@@ -17,141 +35,218 @@ def append(filename):
 		corpus.append(words)
 	return corpus
 
-###removing special characters from sentence##
-annotator=Annotator()
-f=open(read_property('coarse_classification_path'),"r")
-fi=open(read_property('FineOutputfilesPath')+'fine_classification.txt',"w")
-t_class=[]
-for line in f:
-	label=line.split()[0]
-	file_w=read_property('FineInputFiles')+label+"_training.txt"
-	fa=open(file_w,"r")
-	train_class=[]
-	for each_line in fa:
-		#print each_line
-		l=each_line.split()[1].split(":")[1]
-		#print l
-		train_class.append(l)
-	#print train_class
-	fa.close()
-	#print "The label is",label
-	file_word=read_property('FineOutputfilesPath')+label+"_training_word.txt"
-	file_POS=read_property('FineOutputfilesPath')+label+"_training_POS.txt"
-	file_NER=read_property('FineOutputfilesPath')+label+"_training_NER.txt"
-	file_Chunk=read_property('FineOutputfilesPath')+label+"_training_Chunk.txt"
 
-################################################## TRAINING##############################################
+def file_preprocess(filename):
+    corpus=[]
+    classes=[]
+    superclass=[]
+    f=open(filename,'r')
+    lines=f.readlines()
+    for line in lines:
+        line=line.rstrip('\n')
+        if not (line=="\n"):
+            classes.append((line.split()[1]).split(":")[1])
+            superclass.append((line.split()[1]).split(":")[1])
+    for line in lines:
+        line=line.rstrip('\n')
+        line=preprocess(line)
+        sentence=""
+        words=line.split()
+        for i in range(0,len(words)):
+            if not(i==0):
+                sentence=sentence+(words[i])+" "
+        corpus.append(sentence)
+    f.close()
+    return corpus,superclass,classes
 
-#########################  BAG OF WORDS  ################################
+def file_preprocess_test(filename):
+    corpus=[]
+    classes=[]
+    f=open(filename,'r')
+    lines=f.readlines()
+    for line in lines:
+        line=line.rstrip('\n')
+        if not (line=="\n"):
+            classes.append((line.split()[0]).split(":")[1])
+    for line in lines:
+        line=line.rstrip('\n')
+        line=preprocess(line)
+        sentence=""
+        words=line.split()
+        for i in range(0,len(words)):
+            if not(i==0):
+                sentence=sentence+(words[i])+" "
+        corpus.append(sentence)
+    f.close()
+    return corpus,classes
 
-	#print "Training"
-
-	vectorizer_words= CountVectorizer(min_df=1,ngram_range=(1, 2))
-	X_words = vectorizer_words.fit_transform(append(file_word))
-	#print "word feature extraction done"
-
-#########################  BAG OF WORDS OF POS ################################
-
-	vectorizer_POS= CountVectorizer(min_df=1,ngram_range=(1, 2))
-	X_POS = vectorizer_POS.fit_transform(append(file_POS))
-	#print "POS feature extraction done"
-
-#########################  BAG OF WORDS OF NER ################################
-
-	vectorizer_NER= CountVectorizer(min_df=1,ngram_range=(1, 2))
-	X_NER = vectorizer_NER.fit_transform(append(file_NER))
-	#print "NER feature extraction done"
-
-#########################  BAG OF WORDS OF Chunks ################################
-
-	vectorizer_Chunk= CountVectorizer(min_df=1,ngram_range=(1, 2))
-	X_Chunk = vectorizer_Chunk.fit_transform(append(file_Chunk))
-	#print "Chunk feature extraction done"
-
-
-	X=hstack((X_words,X_POS))
-	X_train=hstack((X,X_NER))
-	X_train=hstack((X_train,X_Chunk))
-
-################################################## TESTING ##############################################
-
-#########################  BAG OF WORDS  ################################
-
-	print "Testing"
-	corpus=[]
-	words=""
-	l=line.split()
-	for w in l:
-		words=words+w+" "
-	corpus.append(words)
-	X_words = vectorizer_words.transform(corpus)
-	#print "word feature extraction for test done"
-
-#########################  BAG OF WORDS OF POS ################################
-
-	corpus=[]
-	text = nltk.word_tokenize(line)
-	pos_seq=nltk.pos_tag(text)
-	pos_tags=""
-	for pos in pos_seq:
-		pos_tags=pos_tags+pos[1]+" "
-	corpus.append(pos_tags)
-	X_POS = vectorizer_POS.transform(corpus)
-	#print "POS feature extraction for test done"
-
-#########################  BAG OF WORDS OF NER ################################
-
-	corpus=[]
-	ner=annotator.getAnnotations(line)['ner']
-	ner_tag=""
-	for n in ner:
-		ner_tag=ner_tag+n[1]+" "
-	corpus.append(ner_tag)
-	X_NER= vectorizer_NER.transform(corpus)
-	#print "NER feature extraction for test done"
-
-#########################  BAG OF WORDS OF Chunks ################################
-
-	corpus=[]
-	chunks=annotator.getAnnotations(line)['chunk']
-	chunk=""
-	for elem in chunks:
-		chunk=chunk+elem[1]+" "
-	corpus.append(chunk)
-	X_Chunk= vectorizer_Chunk.transform(corpus)
-	#print "Chunk feature extraction for test done"
+def get_coarse_output_class():
+    corpus=[]
+    classes=[]
+    f=open('CoarseOutputfiles/coarse_classification.txt','r')
+    lines=f.readlines()
+    for line in lines:
+        line=line.rstrip('\n')
+        if not (line=="\n"):
+            classes.append((line.split()[0]))
+    f.close()
+    return classes
 
 
-	X=hstack((X_words,X_POS))
-	X_test=hstack((X,X_NER))
-	X_test=hstack((X_test,X_Chunk))
+def fine_train_label(label):
+    file_label=read_property('FineInputFiles')+label+"_training.txt"
+    train_corpus,temp,train_class=file_preprocess(file_label)
 
-####################################### Applying the LinearSVC Classifier ################################################
+    file_word=read_property('FineOutputfilesPath')+label+"_training_word.txt"
+    file_POS=read_property('FineOutputfilesPath')+label+"_training_POS.txt"
+    file_NER=read_property('FineOutputfilesPath')+label+"_training_NER.txt"
+    file_Chunk=read_property('FineOutputfilesPath')+label+"_training_Chunk.txt"
 
-	#print "Applying SVC"
-	self = LinearSVC(loss='squared_hinge', dual=False, tol=1e-3)
-	self = LinearSVC.fit(self, X_train, train_class)
-	test_class = LinearSVC.predict(self, X_test)
-	print test_class
-	fi.write(label + ":")
-	fi.write(test_class[0]+" ")
-	fi.write(line.split(":")[1])
-	t_class.append(label+":"+test_class[0])
+    vectorizer_words= CountVectorizer(min_df=1,ngram_range=(1, 2))
+    vectorizer_POS= CountVectorizer(min_df=1,ngram_range=(1, 2))
+    vectorizer_Chunk= CountVectorizer(min_df=1,ngram_range=(1, 2))
+    vectorizer_NER= CountVectorizer(min_df=1,ngram_range=(1, 2))
 
-fi.close()
+    X_words = vectorizer_words.fit_transform(append_noread(file_word))
+    X_POS = vectorizer_POS.fit_transform(append_noread(file_POS))
+    X_NER = vectorizer_NER.fit_transform(append_noread(file_NER))
+    X_Chunk = vectorizer_Chunk.fit_transform(append_noread(file_Chunk))
+
+    X=hstack((X_words,X_POS))
+    X_train=hstack((X,X_NER))
+    X_train=hstack((X_train,X_Chunk))
+
+    print "Applying SVC"
+    label_model = LinearSVC(loss='squared_hinge', dual=False, tol=1e-3)
+    label_model = LinearSVC.fit(label_model, X_train, train_class)
+    print(label, " training done")
+
+    return label_model
+
+''' End of def fine_train_label '''
+
+
+
+'''
+Training the model for each coarse class so as the predict the sub_classes
+'''
+NUM_model=fine_train_label('NUM')
+LOC_model=fine_train_label('LOC')
+ENTY_model=fine_train_label('ENTY')
+HUM_model=fine_train_label('HUM')
+DESC_model=fine_train_label('DESC')
+ABBR_model=fine_train_label('ABBR')
+
+
+coarse_class = get_coarse_output_class()
+coarse_corpus = []
+f=open('TestOutputfiles/word_features_test.txt','r')
+lines=f.readlines()
+for line in lines:
+    line=line.rstrip('\n')
+    if not (line=="\n"):
+        coarse_corpus.append(line)
 f.close()
 
-###################################### Accuracy Calculation ################################################
+
+filename_test=read_property('testfilepath')
+corpus_test,test_class_gold=file_preprocess_test(filename_test)
+
+
+
+def compute_word(line,v):
+    corpus=[]
+    words=""
+    l=line.split()
+    for w in l:
+    	words=words+w+" "
+    corpus.append(words)
+    X_words = v.transform(corpus)
+    return X_words
+
+def compute_POS(line,v):
+    corpus=[]
+    text = nltk.word_tokenize(line)
+    pos_seq=nltk.pos_tag(text)
+    pos_tags=""
+    for pos in pos_seq:
+    	pos_tags=pos_tags+pos[1]+" "
+    corpus.append(pos_tags)
+    X_POS = v.transform(corpus)
+    return X_POS
+
+def compute_NER(line,v):
+    corpus=[]
+    ner=annotator.getAnnotations(line)['ner']
+    ner_tag=""
+    for n in ner:
+    	ner_tag=ner_tag+n[1]+" "
+    corpus.append(ner_tag)
+    X_NER= v.transform(corpus)
+    return X_NER
+
+def compute_Chunk(line,v):
+    corpus=[]
+    chunks=annotator.getAnnotations(line)['chunk']
+    chunk=""
+    for elem in chunks:
+    	chunk=chunk+elem[1]+" "
+    corpus.append(chunk)
+    X_Chunk= v.transform(corpus)
+    return X_Chunk
+
 
 test_class_gold=[]
 f=open(read_property('testfilepath'),'r')
 for lines in f:
-	test_class_gold.append(lines.split()[0])
+	test_class_gold.append(lines.split()[0].split(':')[1])
 
-hits=0.00
-for i in range(0,len(t_class)):
-	if t_class[i]==test_class_gold[i]:
-		#print t_class[i]
-		hits=hits+1
+
+hits = 0.00
+print ("Testing ..........(it may take some time) ")
+for i in range(0,len(coarse_class)):
+    file_word=read_property('FineOutputfilesPath')+coarse_class[i]+"_training_word.txt"
+    file_POS=read_property('FineOutputfilesPath')+coarse_class[i]+"_training_POS.txt"
+    file_NER=read_property('FineOutputfilesPath')+coarse_class[i]+"_training_NER.txt"
+    file_Chunk=read_property('FineOutputfilesPath')+coarse_class[i]+"_training_Chunk.txt"
+
+    vectorizer_words= CountVectorizer(min_df=1,ngram_range=(1, 2))
+    vectorizer_POS= CountVectorizer(min_df=1,ngram_range=(1, 2))
+    vectorizer_Chunk= CountVectorizer(min_df=1,ngram_range=(1, 2))
+    vectorizer_NER= CountVectorizer(min_df=1,ngram_range=(1, 2))
+
+    vectorizer_words.fit_transform(append_noread(file_word))
+    vectorizer_POS.fit_transform(append_noread(file_POS))
+    vectorizer_NER.fit_transform(append_noread(file_NER))
+    vectorizer_Chunk.fit_transform(append_noread(file_Chunk))
+
+    X_words = compute_word(coarse_corpus[i],vectorizer_words)
+    X_POS = compute_POS(coarse_corpus[i],vectorizer_POS)
+    X_NER = compute_NER(coarse_corpus[i],vectorizer_NER)
+    X_Chunk = compute_Chunk(coarse_corpus[i],vectorizer_Chunk)
+
+    X=hstack((X_words,X_POS))
+    X_test=hstack((X,X_NER))
+    X_test=hstack((X_test,X_Chunk))
+
+    if coarse_class[i]=='NUM':
+        test_class = LinearSVC.predict(NUM_model,X_test)
+    elif coarse_class[i]=='LOC':
+        test_class = LinearSVC.predict(LOC_model,X_test)
+    elif coarse_class[i]=='ENTY':
+        test_class = LinearSVC.predict(ENTY_model,X_test)
+    elif coarse_class[i]=='DESC':
+        test_class = LinearSVC.predict(DESC_model,X_test)
+    elif coarse_class[i]=='HUM':
+        test_class = LinearSVC.predict(HUM_model,X_test)
+    elif coarse_class[i]=='ABBR':
+        test_class = LinearSVC.predict(ABBR_model,X_test)
+    else:
+        print ("ERROR")
+
+    if test_class == test_class_gold[i]:
+        hits = hits + 1.0
+
 print "Number of hits = ",hits
-print "The accuracy is ",((hits/len(t_class))*100.0)," %"
+print "Total cases : ",len(test_class_gold)
+print "The accuracy is ",((hits/len(test_class_gold))*100.0)," %"
