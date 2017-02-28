@@ -37,9 +37,9 @@ def file_preprocess(filename):
 def compute_POS_Tags(corpus):
     #POS=[]
     fi=open(read_property('POS_features_test_coarse_path'),"w")
+    annotator = Annotator()
     for sentence in corpus:
-        text = nltk.word_tokenize(sentence)
-        pos_seq=nltk.pos_tag(text)
+        pos_seq=annotator.getAnnotations(sentence)['pos']
         #print pos_seq
         pos_tags=""
         for pos in pos_seq:

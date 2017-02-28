@@ -86,6 +86,20 @@ print ("Vectorize")
 print ("NER feature extraction done")
 
 
+''' saving the coarse vectorizers in secondory memory '''
+pickle_out = open("TrainedModels/coarse_vectorizer_words.pickle","wb")
+cPickle.dump(vectorizer_words, pickle_out, protocol=cPickle.HIGHEST_PROTOCOL)
+pickle_out = open("TrainedModels/coarse_vectorizer_POS.pickle","wb")
+cPickle.dump(vectorizer_POS, pickle_out, protocol=cPickle.HIGHEST_PROTOCOL)
+pickle_out = open("TrainedModels/coarse_vectorizer_NER.pickle","wb")
+cPickle.dump(vectorizer_NER, pickle_out, protocol=cPickle.HIGHEST_PROTOCOL)
+pickle_out = open("TrainedModels/coarse_vectorizer_Chunk.pickle","wb")
+cPickle.dump(vectorizer_Chunk, pickle_out, protocol=cPickle.HIGHEST_PROTOCOL)
+
+pickle_out.close()
+''' storing done '''
+
+
 X=hstack((X_words,X_POS))
 X_train=hstack((X,X_NER))
 X_train=hstack((X_train,X_Chunk))
@@ -137,6 +151,7 @@ Saving the model in secondory memory for future references
 '''
 pickle_out = open("TrainedModels/coarse_model.pickle","wb")
 cPickle.dump(coarse_model, pickle_out, protocol=cPickle.HIGHEST_PROTOCOL)
+pickle_out.close()
 
 ''' storing to secondory memory done '''
 

@@ -50,7 +50,7 @@ NUM : How many liters in a gallon ?
 HUM : What is the name of the chocolate company in San Francisco ? 
 DESC : What are amphibians ? 
 HUM : Who discovered x-rays ? 
-HUM : Which comedian s signature line is Can we talk ? 
+ENTY : Which comedian s signature line is Can we talk ? 
 DESC : What is fibromyalgia ? 
 DESC : What is done with worn or outdated flags ? 
 DESC : What does cc in engines mean ? 
@@ -125,7 +125,7 @@ HUM : Who discovered America ?
 DESC : What is the earth s diameter ? 
 HUM : Which president was unmarried ? 
 NUM : How wide is the Milky Way galaxy ? 
-ENTY : During which season do most thunderstorms occur ? 
+LOC : During which season do most thunderstorms occur ? 
 DESC : What is Wimbledon ? 
 NUM : What is the gestation period for a cat ? 
 NUM : How far is a nautical mile ? 
@@ -163,7 +163,7 @@ DESC : What are polymers ?
 NUM : When is hurricane season in the Caribbean ? 
 LOC : Where is the volcano Mauna Loa ? 
 ENTY : What is another astronomic term for the Northern Lights ? 
-ENTY : What peninsula is Spain part of ? 
+LOC : What peninsula is Spain part of ? 
 NUM : When was Lyndon B Johnson born ? 
 DESC : What is acetaminophen ? 
 LOC : What state has the least amount of rain per year ? 
@@ -189,7 +189,7 @@ DESC : What is leukemia ?
 LOC : Where did Howard Hughes die ? 
 DESC : What is the birthstone for June ? 
 DESC : What is the sales tax in Minnesota ? 
-NUM : What is the distance in miles from the earth to the sun ? 
+ENTY : What is the distance in miles from the earth to the sun ? 
 NUM : What is the average life span for a chicken ? 
 NUM : When was the first Wal-Mart store opened ? 
 DESC : What is relative humidity ? 
@@ -247,7 +247,7 @@ LOC : What is the longest suspension bridge in the US ?
 DESC : What is a parasite ? 
 DESC : What is home equity ? 
 DESC : What do meteorologists do ? 
-DESC : What is the criterion for being legally blind ? 
+ENTY : What is the criterion for being legally blind ? 
 HUM : Who is the tallest man in the world ? 
 DESC : What are the twin cities ? 
 ENTY : What did Edward Binney and Howard Smith invent in 1903 ? 
@@ -257,7 +257,7 @@ LOC : What planet is known as the red planet ?
 LOC : What is the depth of the Nile river ? 
 ENTY : What is the colorful Korean traditional dress called ? 
 DESC : What is Mardi Gras ? 
-HUM : Mexican pesos are worth what in US dollars ? 
+ENTY : Mexican pesos are worth what in US dollars ? 
 HUM : Who was the first African American to play for the Brooklyn Dodgers ? 
 HUM : Who was the first Prime Minister of Canada ? 
 NUM : How many Admirals are there in the US Navy ? 
@@ -279,7 +279,7 @@ NUM : What year did Oklahoma become a state ?
 ABBR : What is the abbreviation for Texas ? 
 ENTY : What is a mirror made out of ? 
 LOC : Where on the body is a mortarboard worn ? 
-HUM : What was JFK s wife s name ? 
+ENTY : What was JFK s wife s name ? 
 ABBR : What does IV stand for ? 
 DESC : What is the chunnel ? 
 LOC : Where is Hitler buried ? 
@@ -350,7 +350,7 @@ NUM : What year did the Andy Griffith show begin ?
 DESC : What is acid rain ? 
 NUM : What is the date of Mexico s independence ? 
 LOC : What is the location of Lake Champlain ? 
-LOC : What is the Illinois state flower ? 
+DESC : What is the Illinois state flower ? 
 ENTY : What is Maryland s state bird ? 
 DESC : What is quicksilver ? 
 HUM : Who wrote The Divine Comedy ? 
@@ -360,7 +360,7 @@ ENTY : Why in tennis are zero points called love ?
 ENTY : What kind of dog was Toto in the Wizard of Oz ? 
 DESC : What is a thyroid ? 
 DESC : What does ciao mean ? 
-DESC : What is the only artery that carries blue blood from the heart to the lungs ? 
+ENTY : What is the only artery that carries blue blood from the heart to the lungs ? 
 NUM : How often does Old Faithful erupt at Yellowstone National Park ? 
 DESC : What is acetic acid ? 
 DESC : What is the elevation of St Louis MO ? 
@@ -372,7 +372,7 @@ NUM : What is the atomic weight of silver ?
 ENTY : What currency do they use in Brazil ? 
 DESC : What are pathogens ? 
 DESC : What is mad cow disease ? 
-HUM : Name a food high in zinc 
+ENTY : Name a food high in zinc 
 NUM : When did North Carolina enter the union ? 
 LOC : Where do apple snails live ? 
 DESC : What are ethics ? 
@@ -398,7 +398,7 @@ DESC : What is myopia ?
 NUM : What is the sales tax rate in New York ? 
 NUM : Developing nations comprise what percentage of the world s population ? 
 LOC : What is the fourth highest mountain in the world ? 
-DESC : What is Shakespeare s nickname ? 
+HUM : What is Shakespeare s nickname ? 
 ENTY : What is the heaviest naturally occurring element ? 
 NUM : When is Father s Day ? 
 ABBR : What does the acronym NASA stand for ? 
@@ -423,7 +423,7 @@ DESC : What are Canada s two territories ?
 HUM : What was the name of the plane Lindbergh flew solo across the Atlantic ? 
 DESC : What is genocide ? 
 LOC : What continent is Argentina on ? 
-ENTY : What monastery was raided by Vikings in the late eighth century ? 
+HUM : What monastery was raided by Vikings in the late eighth century ? 
 DESC : What is an earthquake ? 
 LOC : Where is the tallest roller coaster located ? 
 DESC : What are enzymes ? 
@@ -444,7 +444,7 @@ LOC : Which country has the most water pollution ?
 ENTY : What is the scientific name for elephant ? 
 HUM : Who is the actress known for her role in the movie Gypsy ? 
 ENTY : What breed of hunting dog did the Beverly Hillbillies own ? 
-DESC : What is the rainiest place on Earth ? 
+LOC : What is the rainiest place on Earth ? 
 HUM : Who was the first African American to win the Nobel Prize in literature ? 
 NUM : When is St Patrick s Day ? 
 ENTY : What was FDR s dog s name ? 
@@ -452,7 +452,7 @@ ENTY : What colors need to be mixed to get the color pink ?
 ENTY : What is the most popular sport in Japan ? 
 DESC : What is the active ingredient in baking soda ? 
 NUM : When was Thomas Jefferson born ? 
-NUM : How cold should a refrigerator be ? 
+DESC : How cold should a refrigerator be ? 
 NUM : When was the telephone invented ? 
 ENTY : What is the most common eye color ? 
 LOC : Where was the first golf course in the United States ? 
@@ -465,7 +465,7 @@ DESC : What is Susan B Anthony s birthday ?
 LOC : In which state would you find the Catskill Mountains ? 
 ENTY : What do you call a word that is spelled the same backwards and forwards ? 
 DESC : What are pediatricians ? 
-HUM : What chain store is headquartered in Bentonville Arkansas ? 
+ENTY : What chain store is headquartered in Bentonville Arkansas ? 
 DESC : What are solar cells ? 
 DESC : What is compounded interest ? 
 DESC : What are capers ? 

@@ -93,84 +93,23 @@ def get_coarse_output_class():
     f.close()
     return classes
 
+pickle_in = open("TrainedModels/NUM_model.pickle","rb")
+NUM_model = cPickle.load(pickle_in)
 
-def fine_train_label(label):
-    file_label=read_property('FineInputFiles')+label+"_training.txt"
-    train_corpus,temp,train_class=file_preprocess(file_label)
+pickle_in = open("TrainedModels/LOC_model.pickle","rb")
+LOC_model = cPickle.load(pickle_in)
 
-    file_word=read_property('FineOutputfilesPath')+label+"_training_word.txt"
-    file_POS=read_property('FineOutputfilesPath')+label+"_training_POS.txt"
-    file_NER=read_property('FineOutputfilesPath')+label+"_training_NER.txt"
-    file_Chunk=read_property('FineOutputfilesPath')+label+"_training_Chunk.txt"
+pickle_in = open("TrainedModels/ENTY_model.pickle","rb")
+ENTY_model = cPickle.load(pickle_in)
 
-    vectorizer_words= CountVectorizer(min_df=1,ngram_range=(1, 2))
-    vectorizer_POS= CountVectorizer(min_df=1,ngram_range=(1, 2))
-    vectorizer_Chunk= CountVectorizer(min_df=1,ngram_range=(1, 2))
-    vectorizer_NER= CountVectorizer(min_df=1,ngram_range=(1, 2))
+pickle_in = open("TrainedModels/HUM_model.pickle","rb")
+HUM_model = cPickle.load(pickle_in)
 
-    X_words = vectorizer_words.fit_transform(append_noread(file_word))
-    X_POS = vectorizer_POS.fit_transform(append_noread(file_POS))
-    X_NER = vectorizer_NER.fit_transform(append_noread(file_NER))
-    X_Chunk = vectorizer_Chunk.fit_transform(append_noread(file_Chunk))
+pickle_in = open("TrainedModels/DESC_model.pickle","rb")
+DESC_model = cPickle.load(pickle_in)
 
-    X=hstack((X_words,X_POS))
-    X_train=hstack((X,X_NER))
-    X_train=hstack((X_train,X_Chunk))
-
-    '''saving the vectorizers to secondory memory '''
-    pickle_out = open("TrainedModels/"+label+"_vectorizer_words.pickle","wb")
-    cPickle.dump(vectorizer_words, pickle_out, protocol=cPickle.HIGHEST_PROTOCOL)
-    pickle_out = open("TrainedModels/"+label+"_vectorizer_POS.pickle","wb")
-    cPickle.dump(vectorizer_POS, pickle_out, protocol=cPickle.HIGHEST_PROTOCOL)
-    pickle_out = open("TrainedModels/"+label+"_vectorizer_NER.pickle","wb")
-    cPickle.dump(vectorizer_NER, pickle_out, protocol=cPickle.HIGHEST_PROTOCOL)
-    pickle_out = open("TrainedModels/"+label+"_vectorizer_Chunk.pickle","wb")
-    cPickle.dump(vectorizer_Chunk, pickle_out, protocol=cPickle.HIGHEST_PROTOCOL)
-    ''' storing done '''
-
-    print "Applying SVC"
-    label_model = LinearSVC(loss='squared_hinge', dual=False, tol=1e-3)
-    label_model = LinearSVC.fit(label_model, X_train, train_class)
-    print(label, " training done")
-
-    return label_model
-
-''' End of def fine_train_label '''
-
-
-
-'''
-Training the model for each coarse class so as the predict the sub_classes
-'''
-NUM_model=fine_train_label('NUM')
-LOC_model=fine_train_label('LOC')
-ENTY_model=fine_train_label('ENTY')
-HUM_model=fine_train_label('HUM')
-DESC_model=fine_train_label('DESC')
-ABBR_model=fine_train_label('ABBR')
-
-'''
-Saving all the models to secondory memory
-'''
-pickle_out = open("TrainedModels/NUM_model.pickle","wb")
-cPickle.dump(NUM_model, pickle_out, protocol=cPickle.HIGHEST_PROTOCOL)
-
-pickle_out = open("TrainedModels/LOC_model.pickle","wb")
-cPickle.dump(LOC_model, pickle_out, protocol=cPickle.HIGHEST_PROTOCOL)
-
-pickle_out = open("TrainedModels/ENTY_model.pickle","wb")
-cPickle.dump(ENTY_model, pickle_out, protocol=cPickle.HIGHEST_PROTOCOL)
-
-pickle_out = open("TrainedModels/HUM_model.pickle","wb")
-cPickle.dump(HUM_model, pickle_out, protocol=cPickle.HIGHEST_PROTOCOL)
-
-pickle_out = open("TrainedModels/DESC_model.pickle","wb")
-cPickle.dump(DESC_model, pickle_out, protocol=cPickle.HIGHEST_PROTOCOL)
-
-pickle_out = open("TrainedModels/ABBR_model.pickle","wb")
-cPickle.dump(ABBR_model, pickle_out, protocol=cPickle.HIGHEST_PROTOCOL)
-
-''' storing to secondory memory done '''
+pickle_in = open("TrainedModels/ABBR_model.pickle","rb")
+ABBR_model = cPickle.load(pickle_in)
 
 
 
@@ -203,7 +142,8 @@ def compute_word(line,v):
 
 def compute_POS(line,v):
     corpus=[]
-    pos_seq=annotator.getAnnotations(line)['pos']
+    text = nltk.word_tokenize(line)
+    pos_seq=nltk.pos_tag(text)
     pos_tags=""
     for pos in pos_seq:
     	pos_tags=pos_tags+pos[1]+" "
@@ -241,22 +181,25 @@ for lines in f:
 hits = 0.00
 print ("Testing ..........(it may take some time) ")
 for i in range(0,len(coarse_class)):
+    file_word=read_property('FineOutputfilesPath')+coarse_class[i]+"_training_word.txt"
+    file_POS=read_property('FineOutputfilesPath')+coarse_class[i]+"_training_POS.txt"
+    file_NER=read_property('FineOutputfilesPath')+coarse_class[i]+"_training_NER.txt"
+    file_Chunk=read_property('FineOutputfilesPath')+coarse_class[i]+"_training_Chunk.txt"
 
-    pickle_in = open("TrainedModels/"+coarse_class[i]+"_vectorizer_words.pickle","rb")
-    vectorizer_words = cPickle.load(pickle_in)
-    pickle_in = open("TrainedModels/"+coarse_class[i]+"_vectorizer_POS.pickle","rb")
-    vectorizer_POS = cPickle.load(pickle_in)
-    pickle_in = open("TrainedModels/"+coarse_class[i]+"_vectorizer_NER.pickle","rb")
-    vectorizer_NER = cPickle.load(pickle_in)
-    pickle_in = open("TrainedModels/"+coarse_class[i]+"_vectorizer_Chunk.pickle","rb")
-    vectorizer_Chunk = cPickle.load(pickle_in)
+    vectorizer_words= CountVectorizer(min_df=1,ngram_range=(1, 2))
+    vectorizer_POS= CountVectorizer(min_df=1,ngram_range=(1, 2))
+    vectorizer_Chunk= CountVectorizer(min_df=1,ngram_range=(1, 2))
+    vectorizer_NER= CountVectorizer(min_df=1,ngram_range=(1, 2))
+
+    vectorizer_words.fit_transform(append_noread(file_word))
+    vectorizer_POS.fit_transform(append_noread(file_POS))
+    vectorizer_NER.fit_transform(append_noread(file_NER))
+    vectorizer_Chunk.fit_transform(append_noread(file_Chunk))
 
     X_words = compute_word(coarse_corpus[i],vectorizer_words)
     X_POS = compute_POS(coarse_corpus[i],vectorizer_POS)
     X_NER = compute_NER(coarse_corpus[i],vectorizer_NER)
     X_Chunk = compute_Chunk(coarse_corpus[i],vectorizer_Chunk)
-
-    pickle_in.close()
 
     X=hstack((X_words,X_POS))
     X_test=hstack((X,X_NER))
