@@ -97,7 +97,7 @@ def get_classes(question):
     ''' loading the fine model as per the prediction of the coarse model '''
     pickle_in_fine = open("../classifier/TrainedModels/"+coarse_class+"_model.pickle","rb")
     fine_model = cPickle.load(pickle_in_fine)
-    pickle_in_coarse.close()
+    pickle_in_fine.close()
 
     '''loading vectorizer for fine model depending on the coarse output '''
 
