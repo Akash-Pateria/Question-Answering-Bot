@@ -101,14 +101,6 @@ def compute_POS(line):
     return pos_tag
 
 
-def compute_NER(line):
-    annotator=Annotator()
-    ner=annotator.getAnnotations(line)['ner']
-    ner_tag=[]
-    for n in ner:
-        ner_tag.append(n[1])
-    return ner_tag
-
 def get_index(list_r,element):
     for i in range(0,len(list_r)):
         if list_r[i]==element:
@@ -118,26 +110,8 @@ def get_index(list_r,element):
 
 def extract_target(question):
     POS=compute_POS(question)
-    NER=compute_NER(question)
-    flag=0;
     index = []
     target=[]
-    """
-    for ner in NER:
-        if ner not in ['O']:
-            flag=1
-            break
-
-    if flag==0:
-        for i in range(0,len(POS)):
-            if POS[i] in ['NN','NNP','NNS','NNPS','RB','RBS','RBR','CD','FW','JJ','JJS','JJR']:
-                index.append(i)
-
-    else:
-        for i in range(0,len(NER)):
-            if NER[i] not in ['O']:
-                index.append(i)
-    """
 
     for i in range(0,len(POS)):
         if POS[i] in ['NN','NNP','NNS','NNPS','RB','RBS','RBR','CD','FW','JJ','JJS','JJR']:
@@ -147,7 +121,6 @@ def extract_target(question):
     for i in index:
         target.append(question[i])
     return target,index
-
 
 def merge_similar_target(line,target_index):
     line = line.split()
@@ -180,6 +153,9 @@ def merge_similar_target(line,target_index):
                 else:
                     current_index=target_index[i+1]
                 flag=0
+
+        if flag==0:
+            temp_target.append(line[current_index])
     else:
         for i in target_index:
             temp_target.append(line[i])
@@ -209,7 +185,7 @@ for line in file_r:
         file_w.write(' '.join(str(e) for e in target)+"\n")
 
     else:
-        print line," :: ",extract_target(line)," Special Words :: ", special_word
+        print line," :: ",target," Special Words :: ", special_word
         file_w.write(' '.join(str(e) for e in target)+"\t\t\tSpecial Words ::"+' '.join(str(e) for e in special_word)+"\n")
 
 file_w.close()
