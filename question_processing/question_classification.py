@@ -3,6 +3,7 @@ from scipy.sparse import hstack
 from sklearn.svm import LinearSVC
 from practnlptools.tools import Annotator
 import cPickle
+from fine_class_fullname import read_class
 
 
 annotator=Annotator()
@@ -127,6 +128,11 @@ def get_classes(question):
     Getting the fine class output in string form
     '''
     fine_class = fine_class[0]
+
+    '''
+    Get the proper name of the fine class
+    '''
+    fine_class = read_class(fine_class)
 
     return coarse_class,fine_class
 '''
