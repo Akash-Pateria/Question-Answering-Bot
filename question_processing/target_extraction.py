@@ -3,7 +3,7 @@ import nltk
 import re
 
 def preprocess(raw_sentence):
-    sentence= re.sub(r'[$|!|(|)|,|;]',r'',raw_sentence)
+    sentence= re.sub(r'[$|!|.|(|)|,|;]',r'',raw_sentence)
     sentence = re.sub(r'[\-|/]',r' ',sentence)
     return sentence
 
@@ -53,7 +53,8 @@ def extract_special_meaning(question):
         i=i+1
     return special_meaning_words, new_question
 
-def compute_noun(line):
+
+def compute_capitals(line):
     line_r = line.split()
     noun=[]
     index=[]
@@ -64,10 +65,12 @@ def compute_noun(line):
     return noun,index
 
 
-def refine_noun(line,target_index):
-    noun,noun_index=compute_noun(line)
+def refine_capitals(line,target_index):
+    noun,noun_index=compute_capitals(line)
+    not_included_index=[]
     for index in noun_index:
         if index not in target_index:
+            not_included_index.append(index)
             for i in range(0,len(target_index)):
                 if target_index[i]>index:
                     target_index.insert(i,index)
@@ -75,8 +78,17 @@ def refine_noun(line,target_index):
 
     target=[]
     line=line.split()
-    for i in target_index:
-        target.append(line[i])
+    for i in range(0,len(target_index)):
+        if target_index[i] in not_included_index:
+            if target==[]:
+                target.append(line[target_index[i]])
+            else:
+                temp_str=""
+                temp_str=target[-1]+" "+line[target_index[i]]
+                del target[-1]
+                target.append(temp_str)
+        else:
+            target.append(line[target_index[i]])
     return target
 
 
@@ -136,6 +148,45 @@ def extract_target(question):
         target.append(question[i])
     return target,index
 
+
+def merge_similar_target(line,target_index):
+    line = line.split()
+    temp_target=[]
+    if len(target_index) > 1 :
+        current_index=target_index[0]
+        flag=0
+        for i in range(0,len(target_index)-1):
+            if current_index + 1==target_index[i+1]:
+                temp_str=""
+                if temp_target==[]:
+                    temp_str=line[current_index] + " " + line[target_index[i+1]]
+                    current_index=target_index[i+1]
+                    temp_target.append(temp_str)
+                else:
+                    if flag==1:
+                        temp_str=temp_target[-1]+" "+line[target_index[i+1]]
+                        current_index=target_index[i+1]
+                        del temp_target[-1]
+                        temp_target.append(temp_str)
+                    else:
+                        temp_str=line[current_index]+" "+line[target_index[i+1]]
+                        current_index=target_index[i+1]
+                        temp_target.append(temp_str)
+                flag=1
+            else:
+                if flag != 1 or temp_target==[]:
+                    temp_target.append(line[current_index])
+                    current_index=target_index[i+1]
+                else:
+                    current_index=target_index[i+1]
+                flag=0
+    else:
+        for i in target_index:
+            temp_target.append(line[i])
+    return temp_target
+
+
+
 ###########################################################################################################################
 
 file_r = open("questions.txt","r")
@@ -150,15 +201,16 @@ for line in file_r:
 
     target,target_index=extract_target(line)
 
-    target=refine_noun(line,target_index)
+    target=refine_capitals(line,target_index)
 
+    target=merge_similar_target(line,target_index)
     if special_word==[]:
         print line," :: ",target
-        file_w.write(' '.join(str(e) for e in extract_target(line))+"\n")
+        file_w.write(' '.join(str(e) for e in target)+"\n")
 
     else:
         print line," :: ",extract_target(line)," Special Words :: ", special_word
-        file_w.write(' '.join(str(e) for e in extract_target(line))+"\t\t\tSpecial Words ::"+' '.join(str(e) for e in special_word)+"\n")
+        file_w.write(' '.join(str(e) for e in target)+"\t\t\tSpecial Words ::"+' '.join(str(e) for e in special_word)+"\n")
 
 file_w.close()
 file_r.close()
