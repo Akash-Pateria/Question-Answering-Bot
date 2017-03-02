@@ -1,4 +1,5 @@
 from practnlptools.tools import Annotator
+from nltk.corpus import stopwords
 from question_classification import get_classes
 import re
 
@@ -65,31 +66,46 @@ def compute_capitals(line):
     return noun,index
 
 
+def same_case(word1,word2):
+    if word1[0].isupper() and word2[0].isupper():
+        return True
+    elif word1[0].islower() and word2[0].islower():
+        return True
+    elif word1.isdigit() and word2[0].islower():
+        return  True
+    elif word1.isdigit() and word2[0].isupper():
+        return  True
+    elif word1[0].isupper() and word2.isdigit():
+        return  True
+    elif word1[0].islower() and word2.isdigit():
+        return  True
+    else:
+        return False
+
+
 def refine_capitals(line,target_index):
     noun,noun_index=compute_capitals(line)
-    not_included_index=[]
+    #not_included_index=[]
     for index in noun_index:
         if index not in target_index:
-            not_included_index.append(index)
+            #not_included_index.append(index)
             for i in range(0,len(target_index)):
                 if target_index[i]>index:
                     target_index.insert(i,index)
                     break
-
-    target=[]
     line=line.split()
+    target=[]
     for i in range(0,len(target_index)):
-        if target_index[i] in not_included_index:
-            if target==[]:
-                target.append(line[target_index[i]])
+        #if target_index[i] not in not_included_index:
+        target.append(line[target_index[i]])
+        """
             else:
                 temp_str=""
                 temp_str=target[-1]+" "+line[target_index[i]]
                 del target[-1]
                 target.append(temp_str)
-        else:
-            target.append(line[target_index[i]])
-    return target
+        """
+    return target,target_index
 
 
 def compute_POS(line):
@@ -98,7 +114,6 @@ def compute_POS(line):
     pos_tag=[]
     for p in pos:
         pos_tag.append(p[1])
-    #print pos
     return pos_tag
 
 
@@ -115,7 +130,7 @@ def extract_target(question):
     target=[]
 
     for i in range(0,len(POS)):
-        if POS[i] in ['NN','NNP','NNS','NNPS','RB','RBS','RBR','CD','FW','JJ','JJS','JJR']:
+        if POS[i] in ['NN','NNP','NNS','NNPS','RBS','CD','FW','JJ','JJS','JJR']:
             index.append(i)
 
     question = question.split()
@@ -123,23 +138,20 @@ def extract_target(question):
         target.append(question[i])
     return target,index
 
-def same_case(word1,word2):
-    if word1[0].isupper() and word2[0].isupper():
-        return True
-    elif word1[0].islower() and word2[0].islower():
-        return True
-    elif  word1[0].islower() and word2[0].isdigit():
-        return True
-    elif  word1[0].isdigit() and word2[0].islower():
-        return True
-    elif  word1[0].isupper() and word2[0].isdigit():
-        return True
-    elif  word1[0].isdigit() and word2[0].islower():
-        return True
-    else:
-        False
+
+def remove_fine_target(target, fine_class,target_index):
+    temp_target = []
+    temp_index = []
+    for i in range(0,len(target)):
+        if target[i]!=fine_class:
+            temp_target.append(target[i])
+            temp_index.append(target_index[i])
+    return temp_target,temp_index
+
 
 def merge_similar_target(line,target_index):
+    pos=compute_POS(line)
+    temp_pos=[pos[i][0]+pos[i][1] for i in range(0,len(pos)-1)]
     line = line.split()
     temp_target=[]
     if len(target_index) > 1 :
@@ -170,7 +182,6 @@ def merge_similar_target(line,target_index):
                 else:
                     current_index=target_index[i+1]
                 flag=0
-
         if flag==0:
             temp_target.append(line[current_index])
     else:
@@ -179,49 +190,64 @@ def merge_similar_target(line,target_index):
     return temp_target
 
 
-'''
-Function to remove the fine class from target list
-'''
-def remove_fine_target(target, fine_class,target_index):
-    temp_target = []
-    temp_index = []
-    for i in range(0,len(target)):
-        if target[i]!=fine_class:
-            #print target[i]
-            temp_target.append(target[i])
-            temp_index.append(target_index[i])
-    #print "INSIDE REMOVE : ",temp_target
-    return temp_target,temp_index
+def extract_auxiliary_words(line,target,target_index):
+    line=line.split()
+    stop_words = set(stopwords.words('english'))
+    partial_filtered = [w for w in line if not w in stop_words]
+    cleaned=[c for c in partial_filtered if not c in target]
+    for i in range(1,len(cleaned)-1):
+        if cleaned[i]!='\'s':
+            index=get_index(line,cleaned[i])
+            for j in range(0,len(target_index)):
+                if target_index[j]>index:
+                    target_index.insert(j,index)
+                    break
+    temp_target=[]
+    for i in target_index:
+        temp_target.append(line[i])
+    return temp_target,target_index
+
 
 ###########################################################################################################################
 
 file_r = open("questions.txt","r")
 file_w = open("target.txt","w")
 
+stop_words = set(stopwords.words('english'))
+
 for line in file_r:
-    print "\n"
     if not (equal_quote(line)):
         line =quote_preprocess(line)
     coarse_class,fine_class = get_classes(line)
-    #print "Fine : ",fine_class
     special_word,line = extract_special_meaning(line)
     line  = preprocess(line)
 
     target,target_index=extract_target(line)
-    target=refine_capitals(line,target_index)
+    target,target_index=refine_capitals(line,target_index)
+    target,target_index=extract_auxiliary_words(line,target,target_index)
     target,target_index=remove_fine_target(target,fine_class,target_index)
     target=merge_similar_target(line,target_index)
 
     if special_word==[]:
-        print line," \n ",target
-        file_w.write(' '.join(str(e) for e in target)+"\n")
+        print line," :: \n",target
+        for item in target:
+            file_w.write("%s, " % item)
+        file_w.write("\n")
+        #file_w.write(' '.join(str(e) for e in target)+"\n")
 
     else:
-        print line," \n ",target," \nSpecial Words : ", special_word
-        file_w.write(' '.join(str(e) for e in target)+"\t\t\tSpecial Words ::"+' '.join(str(e) for e in special_word)+"\n")
-
+        print line," :: \n",target," Special Words :: ", special_word
+        for item in target:
+            file_w.write("%s, " % item)
+        file_w.write("\t\t\tSpecial Words :: ")
+        for item in special_word:
+            file_w.write("%s, " % item)
+        file_w.write("\n")
+        #file_w.write(' '.join(str(e) for e in target)+"\t\t\tSpecial Words ::"+' '.join(str(e) for e in special_word)+"\n")
+    print "\n"
 file_w.close()
 file_r.close()
+
 """
 def get_target(question):
     if not (equal_quote(question)):
