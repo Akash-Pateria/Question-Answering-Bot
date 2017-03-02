@@ -1,5 +1,5 @@
 from practnlptools.tools import Annotator
-import nltk
+from question_classification import get_classes
 import re
 
 def preprocess(raw_sentence):
@@ -98,6 +98,7 @@ def compute_POS(line):
     pos_tag=[]
     for p in pos:
         pos_tag.append(p[1])
+    #print pos
     return pos_tag
 
 
@@ -122,6 +123,22 @@ def extract_target(question):
         target.append(question[i])
     return target,index
 
+def same_case(word1,word2):
+    if word1[0].isupper() and word2[0].isupper():
+        return True
+    elif word1[0].islower() and word2[0].islower():
+        return True
+    elif  word1[0].islower() and word2[0].isdigit():
+        return True
+    elif  word1[0].isdigit() and word2[0].islower():
+        return True
+    elif  word1[0].isupper() and word2[0].isdigit():
+        return True
+    elif  word1[0].isdigit() and word2[0].islower():
+        return True
+    else:
+        False
+
 def merge_similar_target(line,target_index):
     line = line.split()
     temp_target=[]
@@ -129,7 +146,7 @@ def merge_similar_target(line,target_index):
         current_index=target_index[0]
         flag=0
         for i in range(0,len(target_index)-1):
-            if current_index + 1==target_index[i+1]:
+            if current_index + 1==target_index[i+1] and same_case(line[current_index],line[target_index[i+1]]):
                 temp_str=""
                 if temp_target==[]:
                     temp_str=line[current_index] + " " + line[target_index[i+1]]
@@ -162,6 +179,19 @@ def merge_similar_target(line,target_index):
     return temp_target
 
 
+'''
+Function to remove the fine class from target list
+'''
+def remove_fine_target(target, fine_class,target_index):
+    temp_target = []
+    temp_index = []
+    for i in range(0,len(target)):
+        if target[i]!=fine_class:
+            #print target[i]
+            temp_target.append(target[i])
+            temp_index.append(target_index[i])
+    #print "INSIDE REMOVE : ",temp_target
+    return temp_target,temp_index
 
 ###########################################################################################################################
 
@@ -169,24 +199,47 @@ file_r = open("questions.txt","r")
 file_w = open("target.txt","w")
 
 for line in file_r:
+    print "\n"
     if not (equal_quote(line)):
         line =quote_preprocess(line)
-
+    coarse_class,fine_class = get_classes(line)
+    #print "Fine : ",fine_class
     special_word,line = extract_special_meaning(line)
     line  = preprocess(line)
 
     target,target_index=extract_target(line)
-
     target=refine_capitals(line,target_index)
-
+    target,target_index=remove_fine_target(target,fine_class,target_index)
     target=merge_similar_target(line,target_index)
+
     if special_word==[]:
-        print line," :: ",target
+        print line," \n ",target
         file_w.write(' '.join(str(e) for e in target)+"\n")
 
     else:
-        print line," :: ",target," Special Words :: ", special_word
+        print line," \n ",target," \nSpecial Words : ", special_word
         file_w.write(' '.join(str(e) for e in target)+"\t\t\tSpecial Words ::"+' '.join(str(e) for e in special_word)+"\n")
 
 file_w.close()
 file_r.close()
+"""
+def get_target(question):
+    if not (equal_quote(question)):
+        question =quote_preprocess(question)
+    coarse_class,fine_class = get_classes(question)
+    print "Coarse : ",coarse_class,"\tFine : ",fine_class
+    special_word,line = extract_special_meaning(question)
+    line  = preprocess(line)
+
+    target,target_index=extract_target(line)
+    target=refine_capitals(line,target_index)
+    target,target_index=remove_fine_target(target,fine_class,target_index)
+    target=merge_similar_target(line,target_index)
+
+    print line," \n ",target," \n Special Words : ", special_word
+
+    return target,special_word
+
+question = "What does cc in engines mean ?"
+get_target(question)
+"""
