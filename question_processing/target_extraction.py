@@ -98,13 +98,6 @@ def refine_capitals(line,target_index):
     for i in range(0,len(target_index)):
         #if target_index[i] not in not_included_index:
         target.append(line[target_index[i]])
-        """
-            else:
-                temp_str=""
-                temp_str=target[-1]+" "+line[target_index[i]]
-                del target[-1]
-                target.append(temp_str)
-        """
     return target,target_index
 
 
@@ -202,6 +195,9 @@ def extract_auxiliary_words(line,target,target_index):
                 if target_index[j]>index:
                     target_index.insert(j,index)
                     break
+                if target_index[-1]<index:
+                    target_index.append(index)
+                    break
     temp_target=[]
     for i in target_index:
         temp_target.append(line[i])
@@ -247,25 +243,23 @@ for line in file_r:
     print "\n"
 file_w.close()
 file_r.close()
-
 """
+
 def get_target(question):
-    if not (equal_quote(question)):
+    if not equal_quote(question):
         question =quote_preprocess(question)
     coarse_class,fine_class = get_classes(question)
-    print "Coarse : ",coarse_class,"\tFine : ",fine_class
     special_word,line = extract_special_meaning(question)
     line  = preprocess(line)
 
     target,target_index=extract_target(line)
-    target=refine_capitals(line,target_index)
+    target,target_index=refine_capitals(line,target_index)
+    target,target_index=extract_auxiliary_words(line,target,target_index)
     target,target_index=remove_fine_target(target,fine_class,target_index)
     target=merge_similar_target(line,target_index)
 
-    print line," \n ",target," \n Special Words : ", special_word
+    print question,"\nCoarse : ",coarse_class,"\nFine : ",fine_class," \nTarget : ",target," \nSpecial Words : ", special_word
 
-    return target,special_word
+    return coarse_class,fine_class,target,special_word
 
-question = "What does cc in engines mean ?"
-get_target(question)
 """
