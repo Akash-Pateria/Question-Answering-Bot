@@ -205,7 +205,7 @@ def extract_auxiliary_words(line,target,target_index):
 
 
 ###########################################################################################################################
-
+"""
 file_r = open("questions.txt","r")
 file_w = open("target.txt","w")
 
@@ -261,5 +261,3 @@ def get_target(question):
     print question,"\nCoarse : ",coarse_class,"\nFine : ",fine_class," \nTarget : ",target," \nSpecial Words : ", special_word
 
     return coarse_class,fine_class,target,special_word
-
-"""

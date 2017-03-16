@@ -5,10 +5,7 @@ from sparqlquery import *
 sparql = SPARQLWrapper("http://dbpedia.org/sparql")
 
 
-def print_define(results,output):
-    for result in results["results"]["bindings"]:
-        if result[output]["xml:lang"] == "en":
-            print result[output]["value"]
+
 
 def get_answer(question):
     coarse_class,fine_class,target,special_words = get_target(question)
@@ -28,17 +25,10 @@ def get_answer(question):
         print "Query not generated."
 
 
-    output,query = get_query(fine_class,target,special_words)
-    print "\nQUERY : \n",query
+    get_query(fine_class,target,special_words)
 
-    sparql.setQuery(query)
-    sparql.setReturnFormat(JSON)
-    results = sparql.query().convert()
-
-    print "\nAnswer : "
-    print_define(results,output)
 """ End of def get_answer """
 
 
-q = "When was Rosa Parks born ?"
+q = "When was Mahatma Gandhi born ?"
 get_answer(q)
