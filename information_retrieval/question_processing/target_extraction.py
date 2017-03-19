@@ -255,7 +255,7 @@ def get_target(question):
     target,target_index=extract_target(line)
     target,target_index=refine_capitals(line,target_index)
     target,target_index=extract_auxiliary_words(line,target,target_index)
-    target,target_index=remove_fine_target(target,fine_class,target_index)
+    #target,target_index=remove_fine_target(target,fine_class,target_index)
     target=merge_similar_target(line,target_index)
 
     print question,"\nCoarse : ",coarse_class,"\nFine : ",fine_class," \nTarget : ",target," \nSpecial Words : ", special_word

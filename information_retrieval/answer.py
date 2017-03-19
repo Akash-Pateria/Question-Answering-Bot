@@ -4,9 +4,6 @@ from sparqlquery import *
 
 sparql = SPARQLWrapper("http://dbpedia.org/sparql")
 
-
-
-
 def get_answer(question):
     coarse_class,fine_class,target,special_words = get_target(question)
     if coarse_class == 'HUM':
@@ -30,5 +27,6 @@ def get_answer(question):
 """ End of def get_answer """
 
 
-q = "When was Mahatma Gandhi born ?"
-get_answer(q)
+q = "Who directed Fight Club ?"
+answer = get_answer(q)
+#print "\nAnswer : \t-> | ",answer

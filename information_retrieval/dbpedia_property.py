@@ -14,7 +14,7 @@ def get_property_name(uri):
 }"""
 
     query = q1+" <"+uri+"> "+q2+" <"+uri+"> "+q3
-    print "\nQUERY : \n",query
+    #print "\nQUERY : \n",query
 
     # retrieving property names
     sparql.setQuery(query)
@@ -22,7 +22,6 @@ def get_property_name(uri):
     results = sparql.query().convert()
 
     for result in results["results"]["bindings"]:
-        print result["property"]["value"]
         property_list.append(result["property"]["value"])
 
 
