@@ -27,6 +27,6 @@ def get_answer(question):
 """ End of def get_answer """
 
 
-q = "Who directed Fight Club ?"
+q = "Who directed Titanic ? "
 answer = get_answer(q)
 #print "\nAnswer : \t-> | ",answer

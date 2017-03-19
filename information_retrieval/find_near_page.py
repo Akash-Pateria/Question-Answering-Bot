@@ -46,7 +46,29 @@ def get_near_page(search,target,coarse_class):
 
     for i in range(0,len(search)):
         score = 0
-        p_name = search[i].split()
+        p_name =search[i].split()
+        temp = []
+        for p in p_name:
+            temp.append(p)
+        p_name = temp
+        temp = []
+        for p in p_name:
+            p=p.split('_')
+            for x in p:
+                temp.append(x)
+        p_name = temp
+        temp = []
+        for p in p_name:
+            p=p.split('(')
+            for x in p:
+                temp.append(x)
+        p_name = temp
+        temp = []
+        for p in p_name:
+            p=p.split(')')
+            for x in p:
+                temp.append(x)
+        p_name = temp
         for t in target:
             pos_t = annotator.getAnnotations(t)['pos']
             if coarse_class == "HUM" and pos_t[0][1] in ['VBD','VBG','VBN','VBP','VBZ']:
@@ -56,6 +78,25 @@ def get_near_page(search,target,coarse_class):
                 syn_list = nounify_verb(req_word)
             else:
                 syn_list = word_syn(t)
+            temp = []
+            for p in syn_list:
+                p=p.split('_')
+                for x in p:
+                    temp.append(x)
+            syn_list = temp
+            temp = []
+            for p in syn_list:
+                p=p.split('(')
+                for x in p:
+                    temp.append(x)
+            syn_list = temp
+            temp = []
+            for p in syn_list:
+                p=p.split(')')
+                for x in p:
+                    temp.append(x)
+            syn_list = temp
+
             for w in p_name:
                 for s in syn_list:
                     if s in w or w in s:
