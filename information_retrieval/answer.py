@@ -22,12 +22,12 @@ def get_answer(question):
         print "Query not generated."
 
 
-    get_query(fine_class,target,special_words)
+    return get_query(fine_class,target,special_words)
 
 """ End of def get_answer """
 
 
-q = "Who was the captain of Titanic ?"
+q = "Who directed Titanic ?"
 print "Q. ",q
 answer = get_answer(q)
-#print "\nAnswer : \t-> | ",answer
+print "Ans : ",answer

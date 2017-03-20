@@ -13,7 +13,6 @@ sparql = SPARQLWrapper("http://dbpedia.org/sparql")
 annotator = Annotator()
 wikipedia.set_lang('en')
 stemmer = SnowballStemmer("english")
-answer = ""
 
 def correct_form_verb(word):
     req_words = []
@@ -30,6 +29,7 @@ def correct_form_verb(word):
 
 
 def get_query(fine_class,target,special_words):
+    answer = []
     #finding the resource page
     verb_syn = []
     to_search = ""
@@ -102,9 +102,9 @@ def get_query(fine_class,target,special_words):
         for result in results["results"]["bindings"]:
             if "xml:lang" in result["x"]:
                 if result["x"]["xml:lang"] == "en":
-                    answer = result["x"]["value"]
+                    answer.append(result["x"]["value"])
             else:
-                answer = result["x"]["value"]
+                answer.append(result["x"]["value"])
 
     else:
         #forming the query
@@ -127,18 +127,19 @@ def get_query(fine_class,target,special_words):
         for result in results["results"]["bindings"]:
             if "xml:lang" in result["x"]:
                 if result["x"]["xml:lang"] == "en":
-                    answer = result["x"]["value"]
+                    answer.append(result["x"]["value"])
             else:
-                answer = result["x"]["value"]
+                answer.append(result["x"]["value"])
 
         #if the answer is a resource
-        check_answer = answer.split('/')
+        check_answer = answer[0].split('/')
         if "http" in check_answer[0]:
-            space_answer = answer.split()
-            for a in space_answer:
+            temp_answer = answer
+            answer = []
+            for a in temp_answer:
                 split_answer = a.split('/')
                 if "http" in split_answer[0]:
-                    new_uri = Namespace(answer)
+                    new_uri = Namespace(a)
                     query = Select([v.x]).where((new_uri,dbo.abstract,v.x))
                     query = query.compile()
                     sparql.setQuery(query)
@@ -155,11 +156,14 @@ def get_query(fine_class,target,special_words):
                     for result in results["results"]["bindings"]:
                         if "xml:lang" in result["x"]:
                             if result["x"]["xml:lang"] == "en":
-                                answer = result["x"]["value"]
+                                answer.append(result["x"]["value"])
                         else:
-                            answer = result["x"]["value"]
+                            answer.append(result["x"]["value"])
 
 
-    print "->| ",answer
-    #print "\n type : ",type(answer)
-    return answer
+    #print "->| ",answer
+    ret_answer = ""
+    for a in answer:
+        ret_answer = ret_answer + a +"\n"
+        #print "test : ",ret_answer
+    return ret_answer
