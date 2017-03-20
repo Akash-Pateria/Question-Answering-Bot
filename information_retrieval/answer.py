@@ -27,6 +27,6 @@ def get_answer(question):
 """ End of def get_answer """
 
 
-q = "How many species of Great White Shark are there ?"
+q = "How far is it from Mumbai to Pune ?"
 answer = get_answer(q)
 #print "\nAnswer : \t-> | ",answer

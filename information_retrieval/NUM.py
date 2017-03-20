@@ -18,7 +18,7 @@ answer = ""
 def correct_form_verb(word):
     req_words = []
 
-    syns = wn.synsets(word)
+    syns = wn.synsets(word)[:3]
 
     for s in syns:
         for name in s.lemma_names():
@@ -33,13 +33,15 @@ def get_query(fine_class,target,special_words):
     to_search = ""
     for t in target:
         to_search = to_search+" "+t
+    for s in special_words:
+        to_search = to_search+" "+s
     search_result = wikipedia.search(to_search)
     page = search_result[0]
     wiki_page = wikipedia.page(page)
     wiki_url = wiki_page.url
     resource_page = ""
     resource_page = wiki_url.split('/')[-1]
-    #print "\nRESOURCE : ",resource_page
+    print "\nRESOURCE : ",resource_page
     dbpedia_base ="http://dbpedia.org/resource/"
     uri =  Namespace(dbpedia_base+resource_page)
 
@@ -54,17 +56,17 @@ def get_query(fine_class,target,special_words):
     for t in target:
         pos_t = annotator.getAnnotations(t)['pos']
         if pos_t[0][1] in ['NN','NNS']:
-            req_word = stemmer.stem(pos_t[0][0])
-            target_findkey.append(req_word)
+            #req_word = stemmer.stem(pos_t[0][0])
+            target_findkey.append(t)
         elif pos_t[0][1] in ['VB','VBD','VBG','VBN','VBP','VBZ']:
             req_word = en.verb.infinitive(pos_t[0][0])
             if req_word == "":
                 req_word = pos_t[0][0]
             for w in correct_form_verb(req_word):
-                target_findkey.append(stemmer.stem(w))
+                target_findkey.append(w)
         elif pos_t[0][1] in ['RBS','JJ','JJS','JJR']:
-            req_word = stemmer.stem(pos_t[0][0])
-            target_findkey.append(req_word)
+            #req_word = stemmer.stem(pos_t[0][0])
+            target_findkey.append(t)
 
     #print "\nfind : ",target_findkey
 
@@ -78,7 +80,7 @@ def get_query(fine_class,target,special_words):
         wiki_url = wiki_page.url
         resource_page = ""
         resource_page = wiki_url.split('/')[-1]
-        #print "\nRESOURCE : ",resource_page
+        print "\nRESOURCE NEAREST PAGE: ",resource_page
         dbpedia_base ="http://dbpedia.org/resource/"
         uri =  Namespace(dbpedia_base+resource_page)
         data_req = get_req_keyname(uri,target_findkey,fine_class)
@@ -124,22 +126,24 @@ def get_query(fine_class,target,special_words):
 
 
         #if the answer is resource the lable is given of that resource
-        space_answer = answer.split()
-        for a in space_answer:
-            split_answer = a.split('/')
-            if "http" in split_answer[0]:
-                new_uri = Namespace(answer)
-                query = Select([v.x]).where((new_uri,dbo.abstract,v.x))
-                query = query.compile()
-                sparql.setQuery(query)
-                sparql.setReturnFormat(JSON)
-                results = sparql.query().convert()
-                for result in results["results"]["bindings"]:
-                    if "xml:lang" in result["x"]:
-                        if result["x"]["xml:lang"] == "en":
+        check_answer = answer.split('/')
+        if "http" in check_answer[0]:
+            space_answer = answer.split()
+            for a in space_answer:
+                split_answer = a.split('/')
+                if "http" in split_answer[0]:
+                    new_uri = Namespace(answer)
+                    query = Select([v.x]).where((new_uri,dbo.abstract,v.x))
+                    query = query.compile()
+                    sparql.setQuery(query)
+                    sparql.setReturnFormat(JSON)
+                    results = sparql.query().convert()
+                    for result in results["results"]["bindings"]:
+                        if "xml:lang" in result["x"]:
+                            if result["x"]["xml:lang"] == "en":
+                                answer = result["x"]["value"]
+                        else:
                             answer = result["x"]["value"]
-                    else:
-                        answer = result["x"]["value"]
 
 
     print "\nCheck answer \n->| ",answer

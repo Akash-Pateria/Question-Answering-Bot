@@ -10,7 +10,7 @@ annotator = Annotator()
 def word_syn(word):
     req_words = []
 
-    syns = wn.synsets(word)
+    syns = wn.synsets(word)[:3]
 
     for s in syns:
         for name in s.lemma_names():
@@ -33,12 +33,17 @@ def get_req_keyname(uri,target_findkey,fine_class):
         property_key.append(key)
 
     temp = []
+    x_temp = target_findkey
+    #print "\nTARGET FIND : ",target_findkey
     for t in target_findkey:
         syn_list = word_syn(t)
         for s in syn_list:
             if s not in temp:
-                temp.append(s)
+                temp.append(stemmer.stem(s))
     target_findkey = temp
+
+    for x in x_temp:
+        target_findkey.append(x)
 
     temp = []
     for p in target_findkey:
@@ -59,6 +64,8 @@ def get_req_keyname(uri,target_findkey,fine_class):
             temp.append(x)
     target_findkey = temp
 
+    #print "AFTER SYN : ",target_findkey
+
     for i in range(0,len(property_key)):
         key_score = 0
         check = False
@@ -73,6 +80,8 @@ def get_req_keyname(uri,target_findkey,fine_class):
                 check = True
                 break
 
+        #print "\nKEY : ",property_list[i],"\t SCORE : ",key_score
+
         if fine_class == "date" and check:
             if key_score > 1 and temp_keyname[1] < key_score:
                 temp_keyname[0]=property_list[i]
@@ -83,5 +92,5 @@ def get_req_keyname(uri,target_findkey,fine_class):
                 temp_keyname[1]=key_score
 
     req_keyname = temp_keyname[0]
-    #print "KEY : ",req_keyname
+    print "\nRETURN KEY : ",req_keyname
     return req_keyname

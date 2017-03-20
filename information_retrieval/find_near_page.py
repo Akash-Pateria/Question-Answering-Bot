@@ -26,7 +26,7 @@ def nounify_verb(word):
 def word_syn(word):
     req_words = []
 
-    syns = wn.synsets(word)
+    syns = wn.synsets(word)[:3]
 
     for s in syns:
         for name in s.lemma_names():
