@@ -27,6 +27,6 @@ def get_answer(question):
 """ End of def get_answer """
 
 
-q = "How far is it from Mumbai to Pune ?"
+q = "Who is the founder of Apple ?"
 answer = get_answer(q)
 #print "\nAnswer : \t-> | ",answer

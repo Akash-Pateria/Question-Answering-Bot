@@ -43,7 +43,7 @@ def get_req_keyname(uri,target_findkey,fine_class):
     target_findkey = temp
 
     for x in x_temp:
-        target_findkey.append(x)
+        target_findkey.append(stemmer.stem(x))
 
     temp = []
     for p in target_findkey:
@@ -64,14 +64,14 @@ def get_req_keyname(uri,target_findkey,fine_class):
             temp.append(x)
     target_findkey = temp
 
-    #print "AFTER SYN : ",target_findkey
+    print "AFTER SYN : ",target_findkey
 
     for i in range(0,len(property_key)):
         key_score = 0
         check = False
         for t in target_findkey:
             if t in property_key[i] or property_list[i] in t:
-                key_score = key_score + 1
+                key_score = key_score + 10
                 break
 
         for f in fine_class_list:
