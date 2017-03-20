@@ -8,5 +8,4 @@ Natural Language questions are classified in 6 main classes, with 50 total class
 4. scipy
 5. SPARQLWrapper
 6. nltk
-7. snowballstemmer
-8. sparqlquery [link - https://github.com/pudo/sparqlquery]
+7. sparqlquery [link - https://github.com/pudo/sparqlquery]

@@ -16,7 +16,7 @@ def word_syn(word):
         for name in s.lemma_names():
             if name not in req_words:
                 pos_t = annotator.getAnnotations(name)['pos']
-                if pos_t[0][1] in ['NN','NNS','NNP','NNPS']:
+                if pos_t[0][1] in ['NN','NNS','NNP','NNPS'] and len(name) > 3:
                     req_words.append(stemmer.stem(name))
 
     return req_words
@@ -61,17 +61,19 @@ def get_req_keyname(uri,target_findkey,fine_class):
     for p in target_findkey:
         p=p.split(')')
         for x in p:
-            temp.append(x)
+            if len(x)>2:
+                temp.append(x)
     target_findkey = temp
 
-    print "AFTER SYN : ",target_findkey
+    #print "\nAFTER SYN : ",target_findkey
+    #print "\n FINE CLASS SYN : ",fine_class_list
 
     for i in range(0,len(property_key)):
         key_score = 0
         check = False
         for t in target_findkey:
             if t in property_key[i] or property_list[i] in t:
-                key_score = key_score + 10
+                key_score = key_score + 2
                 break
 
         for f in fine_class_list:
@@ -83,7 +85,7 @@ def get_req_keyname(uri,target_findkey,fine_class):
         #print "\nKEY : ",property_list[i],"\t SCORE : ",key_score
 
         if fine_class == "date" and check:
-            if key_score > 1 and temp_keyname[1] < key_score:
+            if key_score > 0 and temp_keyname[1] < key_score:
                 temp_keyname[0]=property_list[i]
                 temp_keyname[1]=key_score
         else:
@@ -92,5 +94,5 @@ def get_req_keyname(uri,target_findkey,fine_class):
                 temp_keyname[1]=key_score
 
     req_keyname = temp_keyname[0]
-    print "\nRETURN KEY : ",req_keyname
+    #print "\nRETURN KEY : ",req_keyname
     return req_keyname

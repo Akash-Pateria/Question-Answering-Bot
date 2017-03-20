@@ -45,9 +45,10 @@ def get_query(fine_class,target,special_words):
     wiki_url = wiki_page.url
     resource_page = ""
     resource_page = wiki_url.split('/')[-1]
-    print "\nRESOURCE : ",resource_page
+    #print "\nRESOURCE : ",resource_page
     dbpedia_base ="http://dbpedia.org/resource/"
     uri =  Namespace(dbpedia_base+resource_page)
+    first_uri = uri
 
     #find the key-name from the resource page w.r.t. query
     target_findkey = []
@@ -98,14 +99,14 @@ def get_query(fine_class,target,special_words):
             wiki_url = wiki_page.url
             resource_page = ""
             resource_page = wiki_url.split('/')[-1]
-            print "\nRESOURCE NEAREST PAGE: ",resource_page
+            #print "\nRESOURCE NEAREST PAGE: ",resource_page
             dbpedia_base ="http://dbpedia.org/resource/"
             uri =  Namespace(dbpedia_base+resource_page)
             data_req = get_req_keyname(uri,target_findkey,fine_class)
             data_req = Namespace(data_req)
 
         if data_req =="":
-            query = Select([v.x]).where((uri,dbo.abstract,v.x))
+            query = Select([v.x]).where((first_uri,dbo.abstract,v.x))
             query = query.compile()
             sparql.setQuery(query)
             sparql.setReturnFormat(JSON)
@@ -167,12 +168,6 @@ def get_query(fine_class,target,special_words):
                             sparql.setQuery(query)
                             sparql.setReturnFormat(JSON)
                             results = sparql.query().convert()
-                            for result in results["results"]["bindings"]:
-                                if "xml:lang" in result["x"]:
-                                    if result["x"]["xml:lang"] == "en":
-                                        answer = result["x"]["value"]
-                                else:
-                                    answer = result["x"]["value"]
 
                         for result in results["results"]["bindings"]:
                             if "xml:lang" in result["x"]:
@@ -181,6 +176,6 @@ def get_query(fine_class,target,special_words):
                             else:
                                 answer = result["x"]["value"]
 
-    print "\nCheck answer \n->| ",answer
+    print "->| ",answer
     #print "\n type : ",type(answer)
     return answer

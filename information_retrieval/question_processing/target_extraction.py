@@ -258,6 +258,6 @@ def get_target(question):
     #target,target_index=remove_fine_target(target,fine_class,target_index)
     target=merge_similar_target(line,target_index)
 
-    print question,"\nCoarse : ",coarse_class,"\nFine : ",fine_class," \nTarget : ",target," \nSpecial Words : ", special_word
+    #print question,"\nCoarse : ",coarse_class,"\nFine : ",fine_class," \nTarget : ",target," \nSpecial Words : ", special_word
 
     return coarse_class,fine_class,target,special_word
