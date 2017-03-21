@@ -4,6 +4,7 @@ from sparqlquery import *
 from difflib import SequenceMatcher
 from SPARQLWrapper import SPARQLWrapper, JSON
 import webbrowser
+import unicodedata
 
 sparql = SPARQLWrapper("http://dbpedia.org/sparql")
 annotator = Annotator()
@@ -32,6 +33,8 @@ def get_properties(uri,page):
 
 
 def get_query(fine_class,target,special_words):
+    ret_answer = ""
+    answer = []
     if fine_class in ["definition","description"]:
         to_search = ""
         for t in target:
@@ -52,7 +55,7 @@ def get_query(fine_class,target,special_words):
 
     else:
         query=None
-        
+
     """
     elif fine_class == "manner":
         ##
@@ -115,10 +118,15 @@ def get_query(fine_class,target,special_words):
         if results["results"]["bindings"]!=[]:
             for result in results["results"]["bindings"]:
                 if result["x"]["xml:lang"] == "en":
-                    print result["x"]["value"]
+                    ret_answer = unicodedata.normalize('NFKD', result["x"]["value"]).encode('ascii','ignore')
+
         else:
             print "Answer not found in DBpedia(English)"
             webbrowser.open("https://en.wikipedia.org/wiki/"+resource_page)
         print "\n"
     else:
         print"\nQuery could not formed\n"
+
+
+    #print ret_answer
+    return ret_answer

@@ -5,6 +5,7 @@ from difflib import SequenceMatcher
 from SPARQLWrapper import SPARQLWrapper, JSON
 import webbrowser
 from question_processing.target_extraction import remove_fine_target
+import unicodedata
 
 sparql = SPARQLWrapper("http://dbpedia.org/sparql")
 annotator = Annotator()
@@ -27,6 +28,7 @@ def get_capitals(list):
     return capital
 
 def display_answer(results):
+    ret_answer = ""
     if results["results"]["bindings"]!=[]:
         for result in results["results"]["bindings"]:
             if result["x"]["value"].split(":")[0]=="http":
@@ -34,13 +36,16 @@ def display_answer(results):
                     answer=""
                     for element in result["x"]["value"].split("/")[-1].split("_"):
                         answer=answer+" "+element
-                    print answer
+                        ret_answer = answer
+                    #print answer
             else:
                 if result["x"]["xml:lang"] == "en":
-                    print result["x"]["value"]
-        return True
+                    ret_answer = unicodedata.normalize('NFKD', result["x"]["value"]).encode('ascii','ignore')
+        print "CHECK : ",ret_answer
+        print "CHECK TYPE : ",type(ret_answer)
+        return ret_answer
     else:
-        return False
+        return ret_answer
 
 
 def get_properties(uri,page):
@@ -144,7 +149,7 @@ def get_query(fine_class,target,special_words):
                     to_search=to_search+element
             else:
                 for t in target:
-                    to_search = to_search+" "+t                
+                    to_search = to_search+" "+t
         else:
             for element in special_words:
                 target.append(element)

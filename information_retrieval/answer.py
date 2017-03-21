@@ -26,8 +26,14 @@ def get_answer(question):
 
 """ End of def get_answer """
 
+def get_answer_UI(question):
+    answer = get_answer(question)
+    #print "\nANSER type : ",type(answer)
+    return answer
 
-q = "When was Saina Nehwal born ?"
+""" #testing
+q = "How many species of great white shark are there ?"
 print "Q. ",q
-answer = get_answer(q)
-print "Ans : ",answer
+answer = get_answer_UI(q)
+print "\nAns : ",answer
+"""

@@ -7,6 +7,7 @@ from sparqlquery import *
 from nltk.corpus import wordnet as wn
 from nltk.stem.snowball import SnowballStemmer
 import en
+import unicodedata
 
 dbo = Namespace("http://dbpedia.org/ontology/")
 sparql = SPARQLWrapper("http://dbpedia.org/sparql")
@@ -53,7 +54,7 @@ def get_query(fine_class,target,special_words):
     wiki_url = wiki_page.url
     resource_page = ""
     resource_page = wiki_url.split('/')[-1]
-    #print "\nRESOURCE : ",resource_page
+    print "\nRESOURCE : ",resource_page
     dbpedia_base ="http://dbpedia.org/resource/"
     uri =  Namespace(dbpedia_base+resource_page)
     first_uri = uri
@@ -158,4 +159,5 @@ def get_query(fine_class,target,special_words):
             line_flag = True
             ret_answer = ret_answer + a
         #print "test : ",ret_answer
+    ret_answer = unicodedata.normalize('NFKD', ret_answer).encode('ascii','ignore')
     return ret_answer

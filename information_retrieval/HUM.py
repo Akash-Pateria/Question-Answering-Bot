@@ -7,6 +7,7 @@ from sparqlquery import *
 from nltk.corpus import wordnet as wn
 from nltk.stem.snowball import SnowballStemmer
 import en
+import unicodedata
 
 dbo = Namespace("http://dbpedia.org/ontology/")
 sparql = SPARQLWrapper("http://dbpedia.org/sparql")
@@ -188,4 +189,5 @@ def get_query(fine_class,target,special_words):
             line_flag = True
             ret_answer = ret_answer + a
         #print "test : ",ret_answer
+    ret_answer = unicodedata.normalize('NFKD', ret_answer).encode('ascii','ignore')
     return ret_answer
