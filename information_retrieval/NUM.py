@@ -80,19 +80,6 @@ def get_query(fine_class,target,special_words):
     data_req = get_req_keyname(uri,target_findkey,fine_class)
     data_req = Namespace(data_req)
 
-    if data_req == "":
-        search_result = wikipedia.search(to_search)
-        page = search_result[get_near_page(search_result,target,"NUM")]
-        wiki_page = wikipedia.page(page)
-        wiki_url = wiki_page.url
-        resource_page = ""
-        resource_page = wiki_url.split('/')[-1]
-        #print "\nRESOURCE NEAREST PAGE: ",resource_page
-        dbpedia_base ="http://dbpedia.org/resource/"
-        uri =  Namespace(dbpedia_base+resource_page)
-        data_req = get_req_keyname(uri,target_findkey,fine_class)
-        data_req = Namespace(data_req)
-
     if data_req =="":
         query = Select([v.x]).where((first_uri,dbo.abstract,v.x))
         query = query.compile()
@@ -163,7 +150,12 @@ def get_query(fine_class,target,special_words):
 
     #print "->| ",answer
     ret_answer = ""
+    line_flag = False
     for a in answer:
-        ret_answer = ret_answer + a +"\n"
+        if line_flag:
+            ret_answer = ret_answer + "\n"+ a
+        else:
+            line_flag = True
+            ret_answer = ret_answer + a
         #print "test : ",ret_answer
     return ret_answer

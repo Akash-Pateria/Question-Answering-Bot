@@ -180,7 +180,12 @@ def get_query(fine_class,target,special_words):
 
     #print "->| ",answer
     ret_answer = ""
+    line_flag = False
     for a in answer:
-        ret_answer = ret_answer + a +"\n"
+        if line_flag:
+            ret_answer = ret_answer + "\n"+ a
+        else:
+            line_flag = True
+            ret_answer = ret_answer + a
         #print "test : ",ret_answer
     return ret_answer

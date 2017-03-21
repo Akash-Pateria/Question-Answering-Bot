@@ -88,7 +88,7 @@ def get_req_keyname(uri,target_findkey,fine_class):
             if key_score > 0 and temp_keyname[1] < key_score:
                 temp_keyname[0]=property_list[i]
                 temp_keyname[1]=key_score
-        else:
+        elif fine_class != "date":
             if key_score > 0 and temp_keyname[1] < key_score:
                 temp_keyname[0]=property_list[i]
                 temp_keyname[1]=key_score
