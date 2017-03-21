@@ -1,11 +1,5 @@
 from question_processing.target_extraction import get_target
-from SPARQLWrapper import SPARQLWrapper, JSON
 from sparqlquery import *
-
-sparql = SPARQLWrapper("http://dbpedia.org/sparql")
-
-
-
 
 def get_answer(question):
     coarse_class,fine_class,target,special_words = get_target(question)
@@ -28,7 +22,13 @@ def get_answer(question):
     get_query(fine_class,target,special_words)
 
 """ End of def get_answer """
+file_r=open("loc_data.txt","r")#/home/akash/juggernaut/classifier/FineOutputFiles/ABBR_training.txt","r")
+for line in file_r:
+    t=line.split(":")[-1]
+    if t.split()[0]!="city":
+        q=t.split(' ',1)[1]
+        get_answer(q)
+        print "================================================================================================="
 
 
-q = "When was Mahatma Gandhi born ?"
-get_answer(q)
+#get_answer("What does CPR stand for ?")

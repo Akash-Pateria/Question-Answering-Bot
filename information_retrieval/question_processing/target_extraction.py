@@ -132,14 +132,14 @@ def extract_target(question):
     return target,index
 
 
-def remove_fine_target(target, fine_class,target_index):
+def remove_fine_target(target, fine_class):#,target_index):
     temp_target = []
     temp_index = []
     for i in range(0,len(target)):
         if target[i]!=fine_class:
             temp_target.append(target[i])
-            temp_index.append(target_index[i])
-    return temp_target,temp_index
+            #temp_index.append(target_index[i])
+    return temp_target#,temp_index
 
 
 def merge_similar_target(line,target_index):
@@ -255,7 +255,7 @@ def get_target(question):
     target,target_index=extract_target(line)
     target,target_index=refine_capitals(line,target_index)
     target,target_index=extract_auxiliary_words(line,target,target_index)
-    target,target_index=remove_fine_target(target,fine_class,target_index)
+    #target,target_index=remove_fine_target(target,fine_class,target_index)
     target=merge_similar_target(line,target_index)
 
     print question,"\nCoarse : ",coarse_class,"\nFine : ",fine_class," \nTarget : ",target," \nSpecial Words : ", special_word

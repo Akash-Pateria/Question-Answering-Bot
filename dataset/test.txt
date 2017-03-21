@@ -87,7 +87,7 @@ DESC:reason Why is a ladybug helpful ?
 DESC:def What is amoxicillin ?
 HUM:ind Who was the first female United States Representative ?
 DESC:def What are xerophytes ?
-LOC:country What country did Ponce de Leon come from ?
+LOC:country What country did  Juan Ponce de Leon come from ?
 ENTY:event The U.S. Department of Treasury first issued paper currency for the U.S. during which war ?
 DESC:def What is desktop publishing ?
 NUM:temp What is the temperature of the sun 's surface ?
@@ -253,7 +253,7 @@ LOC:city What are the twin cities ?
 ENTY:other What did Edward Binney and Howard Smith invent in 1903 ?
 ENTY:substance What is the statue of liberty made of ?
 DESC:def What is pilates ?
-LOC:other What planet is known as the `` red '' planet ?
+LOC:other What planet is known as the `` red  planet '' ?
 NUM:dist What is the depth of the Nile river ?
 ENTY:termeq What is the colorful Korean traditional dress called ?
 DESC:def What is Mardi Gras ?
@@ -397,7 +397,7 @@ DESC:def What is die-casting ?
 DESC:def What is myopia ?
 NUM:other What is the sales tax rate in New York ?
 NUM:perc Developing nations comprise what percentage of the world 's population ?
-LOC:mount What is the fourth highest mountain in the world ?
+LOC:mount What is the second highest mountain in the world ?
 HUM:ind What is Shakespeare 's nickname ?
 ENTY:substance What is the heaviest naturally occurring element ?
 NUM:date When is Father 's Day ?
