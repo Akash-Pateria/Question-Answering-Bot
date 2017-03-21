@@ -45,7 +45,7 @@ def get_query(fine_class,target,special_words):
     wiki_url = wiki_page.url
     resource_page = ""
     resource_page = wiki_url.split('/')[-1]
-    #print "\nRESOURCE : ",resource_page
+    print "\nRESOURCE : ",resource_page
     dbpedia_base ="http://dbpedia.org/resource/"
     uri =  Namespace(dbpedia_base+resource_page)
     first_uri = uri
@@ -99,7 +99,7 @@ def get_query(fine_class,target,special_words):
             wiki_url = wiki_page.url
             resource_page = ""
             resource_page = wiki_url.split('/')[-1]
-            #print "\nRESOURCE NEAREST PAGE: ",resource_page
+            print "\nRESOURCE NEAREST PAGE: ",resource_page
             dbpedia_base ="http://dbpedia.org/resource/"
             uri =  Namespace(dbpedia_base+resource_page)
             data_req = get_req_keyname(uri,target_findkey,fine_class)

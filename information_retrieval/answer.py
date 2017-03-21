@@ -27,7 +27,7 @@ def get_answer(question):
 """ End of def get_answer """
 
 
-q = "Who directed Titanic ?"
+q = "Who wrote The Da Vinci Code ?"
 print "Q. ",q
 answer = get_answer(q)
 print "Ans : ",answer
