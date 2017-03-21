@@ -84,3 +84,4 @@
 5263 ABBR:exp What does CPR stand for ?
 5310 ABBR:abb What is the acronym for the rating system for air conditioner efficiency ?
 5316 ABBR:exp What is DSL ?
+ABBR:exp What does SNAFU stand for ?

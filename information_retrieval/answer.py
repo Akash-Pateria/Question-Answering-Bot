@@ -27,7 +27,7 @@ def get_answer(question):
 """ End of def get_answer """
 
 
-q = "Who wrote The Da Vinci Code ?"
+q = "When was Saina Nehwal born ?"
 print "Q. ",q
 answer = get_answer(q)
 print "Ans : ",answer

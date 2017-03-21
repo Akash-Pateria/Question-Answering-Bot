@@ -1,0 +1,8 @@
+ABBR:abb What is the abbreviation for Central Bureau of Investigation ?
+ABBR:exp What does USPS stand for ?
+ABBR:exp What is TMJ ?
+ABBR:exp What does the technical term ISDN mean ?
+ABBR:exp What does CPR stand for ?
+ABBR:exp What does the acronym NASA stand for ?
+ABBR:exp What does NASA stand for ?
+ABBR:exp What does the abbreviation SOS mean ?
