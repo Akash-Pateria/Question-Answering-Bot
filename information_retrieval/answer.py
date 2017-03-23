@@ -28,12 +28,6 @@ def get_answer(question):
 
 def get_answer_UI(question):
     answer = get_answer(question)
-    #print "\nANSER type : ",type(answer)
+    if answer=="":
+        answer="Answer not found in DBpedia"
     return answer
-
-""" #testing
-q = "How many species of great white shark are there ?"
-print "Q. ",q
-answer = get_answer_UI(q)
-print "\nAns : ",answer
-"""

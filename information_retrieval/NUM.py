@@ -81,8 +81,21 @@ def get_query(fine_class,target,special_words):
     data_req = get_req_keyname(uri,target_findkey,fine_class)
     data_req = Namespace(data_req)
 
+    if data_req == "":
+        search_result = wikipedia.search(to_search)
+        page = search_result[get_near_page(search_result,target,"HUM")]
+        wiki_page = wikipedia.page(page)
+        wiki_url = wiki_page.url
+        resource_page = ""
+        resource_page = wiki_url.split('/')[-1]
+        print "\nRESOURCE NEAREST PAGE: ",resource_page
+        dbpedia_base ="http://dbpedia.org/resource/"
+        uri =  Namespace(dbpedia_base+resource_page)
+        data_req = get_req_keyname(uri,target_findkey,fine_class)
+        data_req = Namespace(data_req)
+
     if data_req =="":
-        query = Select([v.x]).where((first_uri,dbo.abstract,v.x))
+        query = Select([v.x]).where((uri,dbo.abstract,v.x))
         query = query.compile()
         sparql.setQuery(query)
         sparql.setReturnFormat(JSON)
@@ -159,5 +172,8 @@ def get_query(fine_class,target,special_words):
             line_flag = True
             ret_answer = ret_answer + a
         #print "test : ",ret_answer
-    ret_answer = unicodedata.normalize('NFKD', ret_answer).encode('ascii','ignore')
+    if ret_answer == "":
+        ret_answer = "Answer not found !!"
+    else:
+        ret_answer = unicodedata.normalize('NFKD', ret_answer).encode('ascii','ignore')
     return ret_answer

@@ -2,8 +2,10 @@ from dbpedia_property import get_property_name
 from nltk.stem.snowball import SnowballStemmer
 from nltk.corpus import wordnet as wn
 from practnlptools.tools import Annotator
+from nltk.corpus import stopwords
 
 stemmer = SnowballStemmer("english")
+stop_words = set(stopwords.words('english'))
 annotator = Annotator()
 
 
@@ -16,7 +18,7 @@ def word_syn(word):
         for name in s.lemma_names():
             if name not in req_words:
                 pos_t = annotator.getAnnotations(name)['pos']
-                if pos_t[0][1] in ['NN','NNS','NNP','NNPS'] and len(name) > 3:
+                if pos_t[0][1] in ['NN','NNS','NNP','NNPS'] and name not in stop_words:
                     req_words.append(stemmer.stem(name))
 
     return req_words

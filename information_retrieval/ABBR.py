@@ -39,11 +39,11 @@ def display_answer(results):
                         answer=answer+" "+element
                         ret_answer = answer
                     #print answer
+                else:
+                    print result["x"]["value"].split("/")[-1]
             else:
                 if result["x"]["xml:lang"] == "en":
                     ret_answer = unicodedata.normalize('NFKD', result["x"]["value"]).encode('ascii','ignore')
-        print "CHECK : ",ret_answer
-        print "CHECK TYPE : ",type(ret_answer)
         return ret_answer
     else:
         return ret_answer
@@ -68,30 +68,38 @@ def get_query(fine_class,target,special_words):
     query=None
     if fine_class == "expression":
         to_search = ""
+        if special_words!=[]:
+            for element in special_words:
+                target.append(element)
         for t in target:
             for element in t.split():
                 if element.isupper():
                     to_search = element
+        search_result = wikipedia.search(to_search)
+        page = search_result[0]
+        if page.split("_")[0] in ["List","list","Lists"]:
+            #print "Answer found in DBpedia(English) as list of information"
+            #webbrowser.open("https://en.wikipedia.org/wiki/"+to_search)
+            return ""
+        wiki_page = wikipedia.page(page)
+        wiki_url = wiki_page.url
+        resource_page = ""
+        resource_page = wiki_url.split('/')[-1]
         DBO = Namespace("http://dbpedia.org/ontology/")
         dbpedia_base ="http://dbpedia.org/resource/"
-        uri =  Namespace(dbpedia_base+to_search)
-
-        #property_list=get_properties(to_search)
-        #if "abstract" in property_list:
-        query= Select([v.x]).where((uri, DBO.abstract,v.x))
+        uri =  Namespace(dbpedia_base+resource_page)
+        query= Select([v.x]).where((uri, RDFS.comment,v.x))
         query = query.compile()
-        """else:
-            for properties in property_list:
-                if properties=="wikiPageDisambiguates":
-                    query=Select([v.x]).where((uri,DBO.wikiPageDisambiguates,v.x))
-                    query=query.compile()
-"""
+
         print "\nQUERY : \n",query
 
     if fine_class=="abbreviation":
         target=remove_fine_target(target,fine_class)
         simple = []
         complx=[]
+        if special_words!=[]:
+            for element in special_words:
+                target.append(element)
         for t in target:
             for element in t.split():
                 if element not in ["abbreviation","Abbreviation","abbreviated","expression"]:
@@ -103,7 +111,6 @@ def get_query(fine_class,target,special_words):
             answer=""
             for element in simple:
                 answer=answer+element[0]
-            print "\nAnswer : ",answer
             return answer
         else:
             if simple==[]:
@@ -113,10 +120,20 @@ def get_query(fine_class,target,special_words):
                         to_search=element
                     else:
                         to_search=to_search+" "+element
+                search_result = wikipedia.search(to_search)
+                page = search_result[0]
+                if page.split("_")[0] in ["List","list","Lists"]:
+                    #print "Answer found in DBpedia(English) as list of information"
+                    #webbrowser.open("https://en.wikipedia.org/wiki/"+to_search)
+                    return ""
+                wiki_page = wikipedia.page(page)
+                wiki_url = wiki_page.url
+                resource_page = ""
+                resource_page = wiki_url.split('/')[-1]
+                property_list=get_properties(resource_page)
                 DBO = Namespace("http://dbpedia.org/ontology/")
                 dbpedia_base ="http://dbpedia.org/resource/"
-                uri =  Namespace(dbpedia_base+to_search)
-                property_list=get_properties(to_search)
+                uri =  Namespace(dbpedia_base+resource_page)
                 for properties in property_list:
                     if properties=="wikiPageDisambiguates":
                         query=Select([v.x]).where((uri,DBO.wikiPageDisambiguates,v.x))
@@ -137,10 +154,8 @@ def get_query(fine_class,target,special_words):
         sparql.setQuery(query)
         sparql.setReturnFormat(JSON)
         results = sparql.query().convert()
-
-        print "\nAnswer : "
         check=display_answer(results)
-        if check==False and fine_class!="abbreviation":
+        if check=="" and fine_class!="abbreviation":
             to_search = ""
             for t in target:
                 for element in t.split():
@@ -151,7 +166,6 @@ def get_query(fine_class,target,special_words):
             dbpedia_base ="http://dbpedia.org/resource/"
             uri =  Namespace(dbpedia_base+to_search)
             property_list=get_properties(to_search)
-
             for properties in property_list:
                 if properties=="wikiPageDisambiguates":
                     query=Select([v.x]).where((uri,DBO.wikiPageDisambiguates,v.x))
@@ -161,19 +175,23 @@ def get_query(fine_class,target,special_words):
                 sparql.setReturnFormat(JSON)
                 results = sparql.query().convert()
                 check=display_answer(results)
-                if check==False:
+                if check=="":
                     to_search = ""
                     for t in target:
                         if t.isupper():
                             to_search = to_search+" "+t
                     search_result = wikipedia.search(to_search)
                     page = search_result[0]
+                    if page.split("_")[0] in ["List","list","Lists"]:
+                        #print "Answer found in DBpedia(English) as list of information"
+                        #webbrowser.open("https://en.wikipedia.org/wiki/"+to_search)
+                        return ""
                     wiki_page=None
-                    try:
-                        wiki_page = wikipedia.page(page)
-                    except wikipedia.exceptions.DisambiguationError as e:
-                        print e.options
-                        wiki_page= wikipedia.page(wikipedia.search(e.options[0])[0])
+                    #try:
+                    wiki_page = wikipedia.page(page)
+                    #except wikipedia.exceptions.DisambiguationError as e:
+                    #    print e.options
+                    #wiki_page= wikipedia.page(wikipedia.search(e.options[0])[0])
                     wiki_url = wiki_page.url
                     resource_page = ""
                     resource_page = wiki_url.split('/')[4]
@@ -187,7 +205,9 @@ def get_query(fine_class,target,special_words):
                         sparql.setReturnFormat(JSON)
                         results = sparql.query().convert()
                         check=display_answer(results)
-                        if check==False:
-                            print "Answer not found in DBpedia(English)"
-                            webbrowser.open("https://en.wikipedia.org/wiki/"+to_search)
-                            print "\n"
+                        if check=="":
+                            return ""
+                            #webbrowser.open("https://en.wikipedia.org/wiki/"+to_search)
+                            #print "\n"
+        else:
+            return check

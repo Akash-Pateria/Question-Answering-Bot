@@ -107,7 +107,7 @@ def get_query(fine_class,target,special_words):
             data_req = Namespace(data_req)
 
         if data_req =="":
-            query = Select([v.x]).where((first_uri,dbo.abstract,v.x))
+            query = Select([v.x]).where((uri,dbo.abstract,v.x))
             query = query.compile()
             sparql.setQuery(query)
             sparql.setReturnFormat(JSON)
@@ -166,6 +166,7 @@ def get_query(fine_class,target,special_words):
                         results = sparql.query().convert()
 
                         if not results["results"]["bindings"]:
+                            #print "URI : ",uri
                             query = Select([v.x]).where((uri,dbo.abstract,v.x))
                             query = query.compile()
                             sparql.setQuery(query)
@@ -189,5 +190,8 @@ def get_query(fine_class,target,special_words):
             line_flag = True
             ret_answer = ret_answer + a
         #print "test : ",ret_answer
-    ret_answer = unicodedata.normalize('NFKD', ret_answer).encode('ascii','ignore')
+    if ret_answer == "":
+        ret_answer = "Answer not found !!"
+    else:
+        ret_answer = unicodedata.normalize('NFKD', ret_answer).encode('ascii','ignore')
     return ret_answer
