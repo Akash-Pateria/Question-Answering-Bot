@@ -87,7 +87,7 @@ DESC : Why is a ladybug helpful ?
 DESC : What is amoxicillin ? 
 HUM : Who was the first female United States Representative ? 
 DESC : What are xerophytes ? 
-LOC : What country did Ponce de Leon come from ? 
+LOC : What country did Juan Ponce de Leon come from ? 
 ENTY : The US Department of Treasury first issued paper currency for the US during which war ? 
 DESC : What is desktop publishing ? 
 NUM : What is the temperature of the sun s surface ? 
@@ -397,7 +397,7 @@ DESC : What is die-casting ?
 DESC : What is myopia ? 
 NUM : What is the sales tax rate in New York ? 
 NUM : Developing nations comprise what percentage of the world s population ? 
-LOC : What is the fourth highest mountain in the world ? 
+LOC : What is the second highest mountain in the world ? 
 HUM : What is Shakespeare s nickname ? 
 ENTY : What is the heaviest naturally occurring element ? 
 NUM : When is Father s Day ? 

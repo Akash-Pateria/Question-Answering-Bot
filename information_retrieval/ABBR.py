@@ -27,6 +27,21 @@ def get_capitals(list):
             capital.append(all_element[i])
     return capital
 
+def try_except(page):
+    try:
+        page = wikipedia.page(page)
+        wiki_url = page.url
+    except wikipedia.exceptions.DisambiguationError:
+        wiki_url = wikipedia.search(page)
+        wiki_url=wiki_url[1:]
+        choice=0
+        #print "\nInput question may refer to:\n "
+        #for i, topic in enumerate(topics):
+            #print i, topic
+        #choice = int(raw_input("\nEnter a choice: "))
+        #assert choice in xrange(len(topics))
+        wiki_url=wikipedia.page(wikipedia.search(wiki_url[choice])[0]).url
+    return wiki_url
 
 def display_answer(results):
     ret_answer = ""
@@ -81,8 +96,7 @@ def get_query(fine_class,target,special_words):
             #print "Answer found in DBpedia(English) as list of information"
             #webbrowser.open("https://en.wikipedia.org/wiki/"+to_search)
             return ""
-        wiki_page = wikipedia.page(page)
-        wiki_url = wiki_page.url
+        wiki_url=try_except(page)
         resource_page = ""
         resource_page = wiki_url.split('/')[-1]
         DBO = Namespace("http://dbpedia.org/ontology/")
@@ -126,8 +140,7 @@ def get_query(fine_class,target,special_words):
                     #print "Answer found in DBpedia(English) as list of information"
                     #webbrowser.open("https://en.wikipedia.org/wiki/"+to_search)
                     return ""
-                wiki_page = wikipedia.page(page)
-                wiki_url = wiki_page.url
+                wiki_url=try_except(page)
                 resource_page = ""
                 resource_page = wiki_url.split('/')[-1]
                 property_list=get_properties(resource_page)
@@ -186,13 +199,7 @@ def get_query(fine_class,target,special_words):
                         #print "Answer found in DBpedia(English) as list of information"
                         #webbrowser.open("https://en.wikipedia.org/wiki/"+to_search)
                         return ""
-                    wiki_page=None
-                    #try:
-                    wiki_page = wikipedia.page(page)
-                    #except wikipedia.exceptions.DisambiguationError as e:
-                    #    print e.options
-                    #wiki_page= wikipedia.page(wikipedia.search(e.options[0])[0])
-                    wiki_url = wiki_page.url
+                    wiki_url=try_except(page)
                     resource_page = ""
                     resource_page = wiki_url.split('/')[4]
                     DBO = Namespace("http://dbpedia.org/ontology/")

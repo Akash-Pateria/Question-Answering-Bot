@@ -1,8 +1,18 @@
 from question_processing.target_extraction import get_target
 from SPARQLWrapper import SPARQLWrapper, JSON
 from sparqlquery import *
+import socket
 
 sparql = SPARQLWrapper("http://dbpedia.org/sparql")
+
+def check_internet():
+    REMOTE_SERVER = "www.google.com"
+    try:
+        host = socket.gethostbyname(REMOTE_SERVER)
+        s = socket.create_connection((host, 80), 2)
+        return True
+    except:
+        return False
 
 def get_answer(question):
     coarse_class,fine_class,target,special_words = get_target(question)
@@ -21,13 +31,21 @@ def get_answer(question):
     else:
         print "Query not generated."
 
-
     return get_query(fine_class,target,special_words)
 
 """ End of def get_answer """
 
 def get_answer_UI(question):
-    answer = get_answer(question)
-    if answer=="":
-        answer="Answer not found in DBpedia"
+    conn=False
+    conn=check_internet()
+    if conn:
+        answer = get_answer(question)
+        if answer=="":
+            answer="Answer not found in DBpedia"
+        print "\nANS : ",answer
+    else :
+        answer = "ERROR :: Internet connection is not available..!!!"
+    print answer
     return answer
+
+get_answer_UI("Who directed The Da Vinci Code ?")

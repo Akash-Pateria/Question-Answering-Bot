@@ -15,6 +15,22 @@ annotator = Annotator()
 wikipedia.set_lang('en')
 stemmer = SnowballStemmer("english")
 
+def try_except(page):
+    try:
+        page = wikipedia.page(page)
+        wiki_url = page.url
+    except wikipedia.exceptions.DisambiguationError:
+        wiki_url = wikipedia.search(page)
+        wiki_url=wiki_url[1:]
+        choice=0
+        #print "\nInput question may refer to:\n "
+        #for i, topic in enumerate(topics):
+            #print i, topic
+        #choice = int(raw_input("\nEnter a choice: "))
+        #assert choice in xrange(len(topics))
+        wiki_url=wikipedia.page(wikipedia.search(wiki_url[choice])[0]).url
+    return wiki_url
+
 def correct_form_verb(word):
     req_words = []
 
@@ -42,11 +58,9 @@ def get_query(fine_class,target,special_words):
     #print "TO SEARCH : ",to_search
     search_result = wikipedia.search(to_search)
     page = search_result[0]
-    wiki_page = wikipedia.page(page)
-    wiki_url = wiki_page.url
+    wiki_url=try_except(page)
     resource_page = ""
     resource_page = wiki_url.split('/')[-1]
-    print "\nRESOURCE : ",resource_page
     dbpedia_base ="http://dbpedia.org/resource/"
     uri =  Namespace(dbpedia_base+resource_page)
     first_uri = uri
@@ -75,12 +89,11 @@ def get_query(fine_class,target,special_words):
 
     if data_req == "":
         search_result = wikipedia.search(to_search)
-        page = search_result[get_near_page(search_result,target,"HUM")]
-        wiki_page = wikipedia.page(page)
-        wiki_url = wiki_page.url
+        page = search_result[get_near_page(search_result,target,"ENTY")]
+        wiki_page = wikipedia.page(page)#####################################
+        wiki_url = wiki_page.url#############################################
         resource_page = ""
         resource_page = wiki_url.split('/')[-1]
-        print "\nRESOURCE NEAREST PAGE: ",resource_page
         dbpedia_base ="http://dbpedia.org/resource/"
         uri =  Namespace(dbpedia_base+resource_page)
         data_req = get_req_keyname(uri,target_findkey,fine_class)
