@@ -41,11 +41,13 @@ def get_answer_UI(question):
     if conn:
         answer = get_answer(question)
         if answer=="":
+            with open("LOG/not_answered.txt", "a") as myfile:
+                myfile.write(question)
             answer="Answer not found in DBpedia"
+        else:
+            with open("LOG/answered.txt", "a") as myfile:
+                myfile.write(question)
         print "\nANS : ",answer
     else :
         answer = "ERROR :: Internet connection is not available..!!!"
-    print answer
     return answer
-
-get_answer_UI("Who directed The Da Vinci Code ?")
