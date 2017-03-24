@@ -204,7 +204,7 @@ def get_query(fine_class,target,special_words):
             ret_answer = ret_answer + a
         #print "test : ",ret_answer
     if ret_answer == "":
-        ret_answer = "Answer not found !!"
+        #do nothing
     else:
         ret_answer = unicodedata.normalize('NFKD', ret_answer).encode('ascii','ignore')
     return ret_answer
